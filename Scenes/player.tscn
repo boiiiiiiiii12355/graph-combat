@@ -4,20 +4,27 @@
 [ext_resource type="Texture2D" uid="uid://fjq81le8ad0p" path="res://icon.svg" id="1_v0iea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(128, 128)
+size = Vector2(34, 35.5)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y")]
 script = ExtResource("1_cvnsp")
+ruler_x = NodePath("Rulers/x")
+ruler_y = NodePath("Rulers/y")
+ruler_color = Color(0.40832943, 0.4083295, 0.40832937, 1)
 
 [node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_v0iea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Rulers" type="Node2D" parent="."]
+z_index = -5
 
 [node name="y" type="Line2D" parent="Rulers"]
-points = PackedVector2Array(0, 2)
+points = PackedVector2Array(0, 0)
+default_color = Color(0.28235295, 0.28235295, 0.28235295, 1)
 
 [node name="x" type="Line2D" parent="Rulers"]
+points = PackedVector2Array(0, 0)
