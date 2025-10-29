@@ -1,9 +1,59 @@
-[gd_scene format=3 uid="uid://d3ixkjyjao54n"]
+[gd_scene load_steps=2 format=3 uid="uid://d3ixkjyjao54n"]
 
-[node name="UI" type="Control"]
+[ext_resource type="Script" uid="uid://ci2b3tdx5ooh7" path="res://scripts/ui.gd" id="1_jxero"]
+
+[node name="UI" type="Control" node_paths=PackedStringArray("x_label", "y_label", "dir_input")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jxero")
+x_label = NodePath("xy_labels/x_label")
+y_label = NodePath("xy_labels/y_label")
+dir_input = NodePath("input/TextEdit")
+
+[node name="xy_labels" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="x_label" type="RichTextLabel" parent="xy_labels"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 239.0
+offset_bottom = 37.0
+
+[node name="y_label" type="RichTextLabel" parent="xy_labels"]
+layout_mode = 0
+offset_right = 275.0
+offset_bottom = 40.0
+
+[node name="input" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="input"]
+modulate = Color(1, 1, 1, 0.22352941)
+z_index = 10
+layout_mode = 0
+offset_left = 953.0
+offset_top = -5.0
+offset_right = 1230.0
+offset_bottom = 655.0
+color = Color(0.45490196, 0.45490196, 0.45490196, 1)
+
+[node name="TextEdit" type="TextEdit" parent="input"]
+layout_mode = 0
+offset_left = 969.0
+offset_top = 52.0
+offset_right = 1215.0
+offset_bottom = 134.0
+text = "f(x) = mx + c"
+placeholder_text = "f(x) = mx + c
+"
+
+[connection signal="text_changed" from="input/TextEdit" to="." method="_on_text_edit_text_changed"]

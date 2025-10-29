@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8pl2y15qc3en"]
+[gd_scene load_steps=5 format=3 uid="uid://c8pl2y15qc3en"]
 
 [ext_resource type="PackedScene" uid="uid://cl3mk4vqd4f8d" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Texture2D" uid="uid://dabhf7ituprnp" path="res://sbs_-_texture_grid_pack/128x128/Gray/Prototype_Grid_Gray_04-128x128.png" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://byugwkpud0is0" path="res://Scenes/math_camera.tscn" id="3_3dryh"]
+[ext_resource type="PackedScene" uid="uid://d3ixkjyjao54n" path="res://Scenes/ui.tscn" id="4_3dryh"]
 
 [node name="Game" type="Node2D"]
 
@@ -19,6 +20,10 @@ texture = ExtResource("1_wrm1d")
 stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(576, 324)
 
 [node name="math_camera" parent="Player" instance=ExtResource("3_3dryh")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_3dryh")]
+player = NodePath("../../Player")

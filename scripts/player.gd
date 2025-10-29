@@ -6,6 +6,8 @@ extends CharacterBody2D
 @export var ruler_y_color = Color(0.0, 0.672, 0.0, 1.0)
 @export var ruler_width = 2
 
+var paused = false
+
 func _ready() -> void:
 	ruler_x.add_point(Vector2(-1000, 0))
 	ruler_y.add_point(Vector2(0, -1000))
@@ -22,6 +24,7 @@ func _physics_process(delta: float) -> void:
 	
 @export var gravity = 9.3
 func movement():
-	if not is_on_floor():
-		velocity.y += gravity
+	if paused == false:
+		if not is_on_floor():
+			velocity.y += gravity
 		
