@@ -1,5 +1,8 @@
-[gd_scene format=3 uid="uid://byugwkpud0is0"]
+[gd_scene load_steps=2 format=3 uid="uid://byugwkpud0is0"]
+
+[ext_resource type="Script" uid="uid://cichuoloq6xdf" path="res://scripts/camera_ctrl.gd" id="1_pk5hb"]
 
 [node name="math_camera" type="Camera2D"]
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
+script = ExtResource("1_pk5hb")

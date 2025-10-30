@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8pl2y15qc3en"]
+[gd_scene load_steps=6 format=3 uid="uid://c8pl2y15qc3en"]
 
 [ext_resource type="PackedScene" uid="uid://cl3mk4vqd4f8d" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Texture2D" uid="uid://dabhf7ituprnp" path="res://sbs_-_texture_grid_pack/128x128/Gray/Prototype_Grid_Gray_04-128x128.png" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://byugwkpud0is0" path="res://Scenes/math_camera.tscn" id="3_3dryh"]
 [ext_resource type="PackedScene" uid="uid://d3ixkjyjao54n" path="res://Scenes/ui.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://jg3wydd1d6fe" path="res://Scenes/xy_labels.tscn" id="4_wowpa"]
 
 [node name="Game" type="Node2D"]
 
 [node name="grid" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, -1)
 repeat_size = Vector2(1280, 700)
 repeat_times = 2
 
@@ -19,10 +21,26 @@ offset_bottom = 769.0
 texture = ExtResource("1_wrm1d")
 stretch_mode = 1
 
-[node name="Player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(2, 2)
+[node name="Player" parent="." node_paths=PackedStringArray("ui") instance=ExtResource("1_ebmjs")]
+ui = NodePath("../CanvasLayer/UI")
 
 [node name="math_camera" parent="Player" instance=ExtResource("3_3dryh")]
+zoom = Vector2(3, 3)
+
+[node name="Rulers" type="Node2D" parent="."]
+
+[node name="x" type="Line2D" parent="Rulers"]
+points = PackedVector2Array(10000, 0, -10000, 0)
+width = 0.5
+default_color = Color(1, 0, 0, 1)
+
+[node name="y" type="Line2D" parent="Rulers"]
+points = PackedVector2Array(0, 10000, 0, -10000)
+width = 0.5
+default_color = Color(0, 1, 0, 1)
+
+[node name="xy_labels" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_wowpa")]
+player = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
