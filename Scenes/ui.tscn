@@ -12,7 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_jxero")
 x_label = NodePath("xy_labels/x_label")
 y_label = NodePath("xy_labels/y_label")
-dir_input = NodePath("input/TextEdit")
+dir_input = NodePath("input/input")
 
 [node name="xy_labels" type="Control" parent="."]
 anchors_preset = 0
@@ -46,14 +46,14 @@ offset_right = 1230.0
 offset_bottom = 655.0
 color = Color(0.45490196, 0.45490196, 0.45490196, 1)
 
-[node name="TextEdit" type="TextEdit" parent="input"]
+[node name="input" type="TextEdit" parent="input"]
 layout_mode = 0
 offset_left = 969.0
 offset_top = 52.0
 offset_right = 1215.0
 offset_bottom = 134.0
-text = "f(x) = mx + c"
+text = "f(x) = x"
 placeholder_text = "f(x) = mx + c
 "
 
-[connection signal="text_changed" from="input/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="input/input" to="." method="_on_text_edit_text_changed"]

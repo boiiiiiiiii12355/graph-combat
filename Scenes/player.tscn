@@ -6,11 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(34, 35.5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "line")]
 script = ExtResource("1_cvnsp")
 ruler_x = NodePath("Rulers/x")
 ruler_y = NodePath("Rulers/y")
-ruler_color = Color(0.40832943, 0.4083295, 0.40832937, 1)
+line = NodePath("Rulers/graph")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -28,3 +28,9 @@ default_color = Color(0.28235295, 0.28235295, 0.28235295, 1)
 
 [node name="x" type="Line2D" parent="Rulers"]
 points = PackedVector2Array(0, 0)
+
+[node name="graph" type="Line2D" parent="Rulers"]
+top_level = true
+points = PackedVector2Array(0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 1.0
+default_color = Color(0, 1, 1, 1)

@@ -20,6 +20,7 @@ texture = ExtResource("1_wrm1d")
 stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(2, 2)
 
 [node name="math_camera" parent="Player" instance=ExtResource("3_3dryh")]
 

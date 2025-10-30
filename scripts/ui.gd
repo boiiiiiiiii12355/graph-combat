@@ -30,11 +30,14 @@ func _input(event: InputEvent) -> void:
 		paused = false
 		gamemaster.time_speed_set(1)
 
+
 @export var dir_input : TextEdit
+var expression = Expression.new()
+var regex_x = RegEx.new()
 func _on_text_edit_text_changed() -> void:
 	var input_text = dir_input.text
-	var pattern = RegEx.new()
-	pattern.compile("[]x")
-	var result = pattern.search(input_text)
-	
-	
+	print(input_text)
+	var error = expression.parse(input_text, ["x", "y"])
+	if error == OK:
+		var end = expression.execute([player.global_position.x, player.global_position.y])
+		print(end)

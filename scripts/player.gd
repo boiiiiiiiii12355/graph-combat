@@ -20,11 +20,39 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 func _physics_process(delta: float) -> void:
-	movement()
+	debug_movement()
+	graphing()
 	
 @export var gravity = 9.3
 func movement():
-	if paused == false:
-		if not is_on_floor():
-			velocity.y += gravity
-		
+	pass
+	
+var speed = 1000
+func debug_movement():
+	var dir = Input.get_vector("left", "right", "up", 'down')
+	velocity = dir * speed
+	
+	
+	
+	
+@export var line : Line2D
+var center_point = 6
+var offset = 100
+func graphing():
+	var center = global_position
+	for pt in line.get_point_count():
+		line.set_point_position(center_point, center)
+		if not pt == center_point:
+			if pt < center_point:
+				line.set_point_position(pt, center - Vector2(offset, 50))
+				
+			elif pt > center_point:
+				line.set_point_position(pt, center + Vector2(offset, 0))
+	
+	
+	
+	
+	
+	
+	
+	
