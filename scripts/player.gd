@@ -37,22 +37,18 @@ func debug_movement():
 	
 @export var line : Line2D
 var center_point = 6
-var offset = 100
+var offset = 50
 func graphing():
 	var center = global_position
 	for pt in line.get_point_count():
 		line.set_point_position(center_point, center)
 		if not pt == center_point:
 			if pt < center_point:
-				line.set_point_position(pt, center - Vector2(offset, 50))
+				line.set_point_position(pt, center - Vector2(offset * abs(pt - center_point), 50))
+				
 				
 			elif pt > center_point:
-				line.set_point_position(pt, center + Vector2(offset, 0))
-	
-	
-	
-	
-	
-	
-	
-	
+				line.set_point_position(pt, center + Vector2(offset * (pt - 5), 50))
+				
+				
+				

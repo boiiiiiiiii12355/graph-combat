@@ -31,6 +31,6 @@ points = PackedVector2Array(0, 0)
 
 [node name="graph" type="Line2D" parent="Rulers"]
 top_level = true
-points = PackedVector2Array(0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 width = 1.0
 default_color = Color(0, 1, 1, 1)
