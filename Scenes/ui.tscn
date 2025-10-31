@@ -94,7 +94,7 @@ offset_left = 1033.0
 offset_top = 52.0
 offset_right = 1226.0
 offset_bottom = 93.0
-text = "x ** 2"
+text = "x ** 2 / 100"
 placeholder_text = "m * x + c
 "
 selecting_enabled = false
@@ -115,6 +115,15 @@ offset_right = 1171.0
 offset_bottom = 644.0
 toggle_mode = true
 text = "move along graph (debug)"
+
+[node name="Label2" type="Label" parent="input"]
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 95.0
+offset_right = 1345.0
+offset_bottom = 144.0
+text = "tab to resume time
+and apply formula"
 
 [connection signal="mouse_entered" from="input/input" to="." method="_on_input_mouse_entered"]
 [connection signal="mouse_exited" from="input/input" to="." method="_on_input_mouse_exited"]

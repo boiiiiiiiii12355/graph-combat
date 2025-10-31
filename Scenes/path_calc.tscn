@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://olbouuixcjs4"]
+
+[ext_resource type="Texture2D" uid="uid://fjq81le8ad0p" path="res://icon.svg" id="1_8lw4v"]
+
+[sub_resource type="Curve2D" id="Curve2D_rg6wx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41.58, 0)
+}
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6q2v"]
+radius = 0.01
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_58riu"]
+radius = 0.01
+
+[node name="path" type="Path2D"]
+curve = SubResource("Curve2D_rg6wx")
+
+[node name="follow_this" type="PathFollow2D" parent="."]
+rotates = false
+loop = false
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="follow_this"]
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+length = 331.0
+stiffness = 64.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="follow_this"]
+
+[node name="Icon" type="Sprite2D" parent="follow_this/StaticBody2D"]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_8lw4v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="follow_this/StaticBody2D"]
+shape = SubResource("CircleShape2D_a6q2v")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="follow_this"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="follow_this/RigidBody2D"]
+shape = SubResource("CircleShape2D_58riu")
+
+[node name="Icon" type="Sprite2D" parent="follow_this/RigidBody2D"]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("1_8lw4v")

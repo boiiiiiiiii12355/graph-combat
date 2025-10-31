@@ -1,6 +1,6 @@
 extends Control
 
-@export var player : CharacterBody2D
+@export var player : RigidBody2D
 @export var x_label : RichTextLabel
 @export var y_label : RichTextLabel
 @onready var ruler_x = player.ruler_x

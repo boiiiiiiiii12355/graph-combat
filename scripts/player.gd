@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 @export var ruler_x : Line2D
 @export var ruler_y : Line2D
@@ -18,33 +18,39 @@ func _ready() -> void:
 	center_point = roundi((graph.get_point_count() + 1) / 2)
 	
 func init_path():
+	path.curve.clear_points()
 	for pt in graph.get_point_count():
 		path.curve.add_point(graph.get_point_position(pt), Vector2(0, 0), Vector2(0, 0))
 		
-func _process(delta: float) -> void:
-	move_and_slide()
 	
 func _physics_process(delta: float) -> void:
-	debug_movement()
 	ruler()
 	graphing()
-	if move_on_graph:
-		movement()
+	if move_on_graph and paused == false:
+		path_follow.progress += 1
+		rope_ride()
+	else:
+		linear_velocity = Vector2.ZERO
 		
 	
+
 var move_on_graph = false
+var accel = 100
 @export var gravity = 9.3
 func movement():
+	var dist = sqrt((path_follow.global_position.x - global_position.x) ** 2 + (path_follow.global_position.y - global_position.y) ** 2)
+	var dir = (path_follow.global_position - global_position).normalized()
+	var req_vel = dir * accel
+	
+	linear_velocity = lerp(linear_velocity, linear_velocity + req_vel, 0.1)
 	move_on_graph = true
 	
+@onready var rope_pt : RigidBody2D = path.get_child(0).get_child(2)
+func rope_ride():
+	gravity_scale = 0
+	global_position = rope_pt.global_position
+	linear_velocity = rope_pt.linear_velocity
 	
-
-	
-	
-var speed = 100
-func debug_movement():
-	var dir = Input.get_vector("left", "right", "up", 'down')
-	velocity = dir * speed
 	
 func ruler():
 	ruler_x.set_point_position(1, Vector2(global_position.x, 0))
@@ -57,26 +63,20 @@ func ruler():
 @export var ui : Control
 @export var graph_accel = 5
 @export var path : Path2D
+@onready var path_follow = path.get_child(0)
 @export var world_boundary = Vector2(1000, 1000)
 var lerp_weight = 0.5
 var center_point = 13
 var offset = 5
 var input_y = 0
-var closest_point : Vector2
 var graph_mem : Array[Vector2]
 #also handles detecting current and next pt	
 func graphing():
 	
-	var center = global_position
-	
 	for pt in graph.get_point_count():
-		#closest point tracker
-		var closest_to_player = path.curve.get_closest_point(global_position)
-		if graph.get_point_position(pt) == closest_to_player:
-			if closest_to_player != closest_point:
-				print(closest_to_player)
-			closest_point = closest_to_player
-			
+#_____________________________________________________closest_point
+
+		
 #_____________________________________________________graphing!!!
 		var pt_x
 		var pt_y

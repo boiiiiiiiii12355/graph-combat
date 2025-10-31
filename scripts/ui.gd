@@ -1,10 +1,13 @@
 extends Control
 
-@export var player : CharacterBody2D
+@export var player : RigidBody2D
 @export var view : Viewport
 func _ready() -> void:
 	_on_text_edit_text_changed()
-	
+	paused = true
+	anim_player.play("pause")
+	gamemaster.time_speed_set(0)
+		
 func _physics_process(delta: float) -> void:
 	player.paused = paused
 	
