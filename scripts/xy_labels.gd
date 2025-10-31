@@ -17,6 +17,6 @@ func update_labels():
 	var y_text_offset = Vector2(0, 0)
 	
 	x_label.text = str(round(x_label_pos))
-	y_label.text = str(round(y_label_pos))
+	y_label.text = str(round(-y_label_pos))
 	x_label.global_position = x_text_offset + ruler_x.get_point_position(1)
 	y_label.global_position = y_text_offset + ruler_y.get_point_position(1)
