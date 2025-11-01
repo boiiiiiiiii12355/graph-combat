@@ -26,8 +26,9 @@ func init_path():
 func _physics_process(delta: float) -> void:
 	ruler()
 	graphing()
+	path_follow.progress += 1
 	if move_on_graph and paused == false:
-		path_follow.progress += 1
+		
 		rope_ride()
 	else:
 		linear_velocity = Vector2.ZERO

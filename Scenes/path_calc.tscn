@@ -19,7 +19,6 @@ curve = SubResource("Curve2D_rg6wx")
 
 [node name="follow_this" type="PathFollow2D" parent="."]
 rotates = false
-loop = false
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="follow_this"]
 node_a = NodePath("../StaticBody2D")
