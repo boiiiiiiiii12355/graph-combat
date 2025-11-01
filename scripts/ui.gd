@@ -7,24 +7,21 @@ func _ready() -> void:
 	paused = true
 	anim_player.play("pause")
 	gamemaster.time_speed_set(0)
-		
-func _physics_process(delta: float) -> void:
-	player.paused = paused
-	
 
 
 var paused = false
-func _input(event: InputEvent) -> void:
+func _physics_process(delta: float) -> void:
 	if typing == false:
 		if Input.is_action_just_pressed("pause") and paused == false:
 			paused = true
 			anim_player.play("pause")
 			gamemaster.time_speed_set(0)
-			
+
 		elif Input.is_action_just_pressed("pause") and paused == true:
 			paused = false
 			anim_player.play("resume")
 			gamemaster.time_speed_set(1)
+	player.paused = paused
 
 @export var anim_player : AnimationPlayer
 
@@ -36,16 +33,17 @@ func calc_y(x):
 		return y
 	else:
 		return 0
-		
+
 @export var dir_input : TextEdit
 var expression = Expression.new()
 var error
 func _on_text_edit_text_changed() -> void:
 	var input_text = dir_input.text
 	calc_y(0)
+	player.path_follow.progress = 0
 	error = expression.parse(input_text, ["x"])
 
-		
+
 
 var typing = false
 func _on_input_mouse_entered() -> void:

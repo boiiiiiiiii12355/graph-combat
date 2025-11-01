@@ -12,7 +12,7 @@ func _input(event: InputEvent) -> void:
 	
 
 @export var min_zoom = 100
-@export var max_zoom = 5
+@export var max_zoom = 2
 func _physics_process(delta: float) -> void:
 	if req_zoom > Vector2(min_zoom, min_zoom):
 		req_zoom = Vector2(min_zoom, min_zoom)
