@@ -7,10 +7,12 @@
 size = Vector2(6, 6)
 
 [node name="Player" type="RigidBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "graph")]
+process_mode = 3
 mass = 0.1
 script = ExtResource("1_cvnsp")
 ruler_x = NodePath("Rulers/y")
 ruler_y = NodePath("Rulers/x")
+ruler_width = 0.5
 graph = NodePath("Rulers/graph")
 
 [node name="Icon" type="Sprite2D" parent="."]

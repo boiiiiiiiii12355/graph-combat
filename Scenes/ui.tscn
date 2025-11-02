@@ -57,6 +57,7 @@ _data = {
 }
 
 [node name="UI" type="Control" node_paths=PackedStringArray("anim_player", "dir_input")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,7 +126,10 @@ offset_bottom = 144.0
 text = "tab to resume time
 and apply formula"
 
+[node name="graph_update" type="Timer" parent="input"]
+
 [connection signal="mouse_entered" from="input/input" to="." method="_on_input_mouse_entered"]
 [connection signal="mouse_exited" from="input/input" to="." method="_on_input_mouse_exited"]
 [connection signal="text_changed" from="input/input" to="." method="_on_text_edit_text_changed"]
 [connection signal="button_down" from="input/MAG" to="." method="_on_mag_button_down"]
+[connection signal="timeout" from="input/graph_update" to="." method="_on_graph_update_timeout"]

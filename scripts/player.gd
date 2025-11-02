@@ -49,16 +49,16 @@ func movement():
 @onready var rope = path.get_child(0).get_child(0)
 var rope_grab_point : RigidBody2D
 func rope_ride():
-	path_follow.progress += 3
+	path_follow.progress += 5
 
 func check_time():
 	for pt in rope.get_children():
 		if pt.is_class("RigidBody2D"):
 			if paused == true:
-				pt.process_mode = pt.PROCESS_MODE_DISABLED
+				get_tree().paused = true
 				set_deferred("freeze", true)
 			else:
-				pt.process_mode = pt.PROCESS_MODE_ALWAYS
+				get_tree().paused = false
 				set_deferred("freeze", false)
 
 		if pt.name == "Rope_seg3":
@@ -79,7 +79,7 @@ func ruler():
 @export var world_boundary = Vector2(1000, 1000)
 var lerp_weight = 0.5
 var center_point = 13
-var offset = 10
+var offset = 5
 var input_y = 0
 var graph_mem : Array[Vector2]
 #also handles detecting current and next pt
@@ -95,11 +95,12 @@ func graphing():
 			pt_y = ui.calc_y(pt_x)
 
 		elif pt < center_point  or  pt > center_point:
-			pt_x = (pt - center_point)
+			pt_x = offset *(pt - center_point)
 			pt_y = ui.calc_y(pt_x)
 
 
 		var req = Vector2(pt_x, -pt_y)
+		req = clamp(req, Vector2(-world_boundary.x, -world_boundary.y), Vector2(world_boundary.x, world_boundary.y))
 		update_graph(pt, req)
 
 
