@@ -4,7 +4,7 @@ extends RigidBody2D
 @export var ruler_y : Line2D
 @export var ruler_x_color = Color(0.788, 0.0, 0.0, 1.0)
 @export var ruler_y_color = Color(0.0, 0.672, 0.0, 1.0)
-@export var ruler_width = 0.3
+@export var ruler_width = 0.4
 
 var paused = true
 
