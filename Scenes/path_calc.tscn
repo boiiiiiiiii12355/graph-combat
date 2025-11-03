@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://olbouuixcjs4"]
-
-[ext_resource type="PackedScene" uid="uid://rqghv24q68xe" path="res://Scenes/rope.tscn" id="1_58riu"]
+[gd_scene load_steps=2 format=3 uid="uid://olbouuixcjs4"]
 
 [sub_resource type="Curve2D" id="Curve2D_rg6wx"]
 _data = {
@@ -12,7 +10,4 @@ point_count = 2
 curve = SubResource("Curve2D_rg6wx")
 
 [node name="follow_this" type="PathFollow2D" parent="."]
-rotates = false
 loop = false
-
-[node name="Rope" parent="follow_this" instance=ExtResource("1_58riu")]

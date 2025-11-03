@@ -5,7 +5,7 @@ extends RigidBody2D
 @export var ruler_x_color = Color(0.788, 0.0, 0.0, 1.0)
 @export var ruler_y_color = Color(0.0, 0.672, 0.0, 1.0)
 @export var ruler_width = 0.4
-
+var graph_end
 var paused = true
 
 func _ready() -> void:
@@ -16,64 +16,48 @@ func _ready() -> void:
 	ruler_y.width = ruler_width
 	graph_mem.resize(graph.get_point_count())
 	center_point = roundi((graph.get_point_count() + 1) / 2)
-
+	
+	
 func init_path():
 	path.curve.clear_points()
 	for pt in graph.get_point_count():
 		path.curve.add_point(graph.get_point_position(pt), Vector2(0, 0), Vector2(0, 0))
-
-
+	
+	
 func _physics_process(delta: float) -> void:
-	check_time()
 	ruler()
 	graphing()
-	global_position = rope_grab_point.global_position
 	if paused == false:
-		rope_ride()
 		movement()
-
-
-
+		
+		
 var move_on_graph = false
 var accel = 600
 func movement():
-	#var dist = sqrt((path_follow.global_position.x - global_position.x) ** 2 + (path_follow.global_position.y - global_position.y) ** 2)
-	#var dir = (path_follow.global_position - global_position).normalized()
-	#var req_vel = dir * accel
-
-	#linear_velocity = lerp(linear_velocity, linear_velocity + req_vel, 0.1)
-
-	if rope_grab_point:
-		global_position = rope_grab_point.global_position
+	if not path_follow.progress == graph_end:
 		gravity_scale = 0
-
-@onready var rope = path.get_child(0).get_child(0)
-var rope_grab_point : RigidBody2D
+		print(path_follow.progress)
+		print(graph_end)
+		rope_ride()
+		
+		
+	else:
+		gravity_scale = .3
+		
+		
 func rope_ride():
+	linear_velocity = (path_follow.global_position - global_position) * 100
+	angular_velocity = (rotation - path_follow.rotation) * 50
 	path_follow.progress += 10
-
-func check_time():
-#_______________________________________________rope pausing
-	for pt in rope.get_children():
-		if pt.is_class("RigidBody2D"):
-			if paused == true:
-				pt.linear_velocity = Vector2.ZERO
-				get_tree().paused = true
-				set_deferred("freeze", true)
-			else:
-				get_tree().paused = false
-				set_deferred("freeze", false)
-
-		if pt.name == "Rope_seg3":
-			rope_grab_point = pt
-
+	
+	
 func ruler():
 	ruler_x.set_point_position(1, Vector2(global_position.x, 0))
 	ruler_x.set_point_position(0, global_position)
 	ruler_y.set_point_position(1, Vector2(0, global_position.y))
 	ruler_y.set_point_position(0, global_position)
-
-
+	
+	
 @export var graph : Line2D
 @export var ui : Control
 @export var graph_accel = 5
@@ -126,3 +110,6 @@ func update_graph(pt, req):
 
 func update_path(pt, req):
 	path.curve.set_point_position(pt, req)
+	graph_end = path.curve.get_baked_length()
+	print("baked" + str(graph_end))
+	

@@ -29,7 +29,7 @@ mass = 0.1
 shape = SubResource("CapsuleShape2D_aw0jv")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="Rope_seg1/CollisionShape2D"]
-position = Vector2(0, -6)
+position = Vector2(0, -13)
 node_a = NodePath("../../../pin")
 node_b = NodePath("../..")
 
