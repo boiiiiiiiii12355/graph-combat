@@ -22,11 +22,12 @@ offset_bottom = 769.0
 texture = ExtResource("1_wrm1d")
 stretch_mode = 1
 
-[node name="Player" parent="." node_paths=PackedStringArray("ui", "path") instance=ExtResource("1_ebmjs")]
+[node name="Player" parent="." node_paths=PackedStringArray("ui", "path", "cam") instance=ExtResource("1_ebmjs")]
 ruler_x_color = Color(0, 1, 0, 1)
 ruler_y_color = Color(1, 0, 0, 1)
 ui = NodePath("../CanvasLayer/UI")
 path = NodePath("../path")
+cam = NodePath("math_camera")
 
 [node name="math_camera" parent="Player" instance=ExtResource("3_3dryh")]
 zoom = Vector2(3, 3)

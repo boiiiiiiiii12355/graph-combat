@@ -27,6 +27,7 @@ func _physics_process(delta: float) -> void:
 	check_time()
 	ruler()
 	graphing()
+	global_position = rope_grab_point.global_position
 	if paused == false:
 		rope_ride()
 		movement()
@@ -49,12 +50,14 @@ func movement():
 @onready var rope = path.get_child(0).get_child(0)
 var rope_grab_point : RigidBody2D
 func rope_ride():
-	path_follow.progress += 5
+	path_follow.progress += 10
 
 func check_time():
+#_______________________________________________rope pausing
 	for pt in rope.get_children():
 		if pt.is_class("RigidBody2D"):
 			if paused == true:
+				pt.linear_velocity = Vector2.ZERO
 				get_tree().paused = true
 				set_deferred("freeze", true)
 			else:
@@ -76,14 +79,20 @@ func ruler():
 @export var graph_accel = 5
 @export var path : Path2D
 @onready var path_follow = path.get_child(0)
-@export var world_boundary = Vector2(1000, 1000)
+@export var cam : Camera2D
+@export var world_boundary = Vector2(500, 500)
 var lerp_weight = 0.5
 var center_point = 13
-var offset = 5
+var offset = 1
 var input_y = 0
 var graph_mem : Array[Vector2]
 #also handles detecting current and next pt
 func graphing():
+
+	var cam_border = cam.get_viewport_rect().size
+#____________________________________________________camera bounds
+
+
 
 	for pt in graph.get_point_count():
 
@@ -100,7 +109,7 @@ func graphing():
 
 
 		var req = Vector2(pt_x, -pt_y)
-		req = clamp(req, Vector2(-world_boundary.x, -world_boundary.y), Vector2(world_boundary.x, world_boundary.y))
+		req = req.clamp(-cam_border, cam_border)
 		update_graph(pt, req)
 
 
