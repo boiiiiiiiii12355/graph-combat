@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8pl2y15qc3en"]
+[gd_scene load_steps=8 format=3 uid="uid://c8pl2y15qc3en"]
 
 [ext_resource type="PackedScene" uid="uid://cl3mk4vqd4f8d" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Texture2D" uid="uid://dabhf7ituprnp" path="res://sbs_-_texture_grid_pack/128x128/Gray/Prototype_Grid_Gray_04-128x128.png" id="1_wrm1d"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://d3ixkjyjao54n" path="res://Scenes/ui.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://jg3wydd1d6fe" path="res://Scenes/xy_labels.tscn" id="4_wowpa"]
 [ext_resource type="PackedScene" uid="uid://olbouuixcjs4" path="res://Scenes/path_calc.tscn" id="5_i6g32"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
 [node name="Game" type="Node2D"]
 
@@ -53,3 +55,9 @@ player = NodePath("../Player")
 
 [node name="UI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_3dryh")]
 player = NodePath("../../Player")
+
+[node name="floor" type="StaticBody2D" parent="."]
+position = Vector2(2, 108)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+shape = SubResource("WorldBoundaryShape2D_i6g32")
