@@ -24,6 +24,11 @@ gamemaster="*res://scripts/game_master.gd"
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[global_group]
+
+p2=""
+p1=""
+
 [input]
 
 pause={

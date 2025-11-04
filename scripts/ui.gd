@@ -6,7 +6,6 @@ func _ready() -> void:
 	_on_text_edit_text_changed()
 	paused = true
 	anim_player.play("pause")
-	gamemaster.time_speed_set(0)
 
 
 var paused = false
@@ -15,12 +14,10 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("pause") and paused == false:
 			paused = true
 			anim_player.play("pause")
-			gamemaster.time_speed_set(0)
 
 		elif Input.is_action_just_pressed("pause") and paused == true:
 			paused = false
 			anim_player.play("resume")
-			gamemaster.time_speed_set(1)
 	player.paused = paused
 
 @export var anim_player : AnimationPlayer

@@ -114,4 +114,7 @@ func update_graph(pt, req):
 func update_path(pt, req):
 	path.curve.set_point_position(pt, req)
 	graph_end = path.curve.get_baked_length()
-	print("baked" + str(graph_end))
+
+func _on_area_2d_area_entered(area : Area2D):
+	if area.is_in_group("p2"):
+		gamemaster.juice(cam)

@@ -95,7 +95,7 @@ offset_left = 1033.0
 offset_top = 52.0
 offset_right = 1226.0
 offset_bottom = 93.0
-text = "x ** 2 / 100"
+text = "-x + 250"
 placeholder_text = "m * x + c
 "
 selecting_enabled = false
