@@ -1,3 +1,63 @@
-[gd_scene format=3 uid="uid://c8pl2y15qc3en"]
+[gd_scene load_steps=8 format=3 uid="uid://c8pl2y15qc3en"]
+
+[ext_resource type="PackedScene" uid="uid://cl3mk4vqd4f8d" path="res://Scenes/player.tscn" id="1_ebmjs"]
+[ext_resource type="Texture2D" uid="uid://dabhf7ituprnp" path="res://sbs_-_texture_grid_pack/128x128/Gray/Prototype_Grid_Gray_04-128x128.png" id="1_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://byugwkpud0is0" path="res://Scenes/math_camera.tscn" id="3_3dryh"]
+[ext_resource type="PackedScene" uid="uid://d3ixkjyjao54n" path="res://Scenes/ui.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://jg3wydd1d6fe" path="res://Scenes/xy_labels.tscn" id="4_wowpa"]
+[ext_resource type="PackedScene" uid="uid://olbouuixcjs4" path="res://Scenes/path_calc.tscn" id="5_i6g32"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
 [node name="Game" type="Node2D"]
+
+[node name="grid" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, -1)
+repeat_size = Vector2(1280, 700)
+repeat_times = 2
+
+[node name="grid_texture" type="TextureRect" parent="grid"]
+modulate = Color(0.32915837, 0.3291584, 0.3291584, 1)
+z_index = -100
+offset_right = 1282.0
+offset_bottom = 769.0
+texture = ExtResource("1_wrm1d")
+stretch_mode = 1
+
+[node name="Player" parent="." node_paths=PackedStringArray("ui", "path", "cam") instance=ExtResource("1_ebmjs")]
+ruler_x_color = Color(0, 1, 0, 1)
+ruler_y_color = Color(1, 0, 0, 1)
+ui = NodePath("../CanvasLayer/UI")
+path = NodePath("../path")
+cam = NodePath("math_camera")
+
+[node name="math_camera" parent="Player" instance=ExtResource("3_3dryh")]
+zoom = Vector2(3, 3)
+
+[node name="Rulers" type="Node2D" parent="."]
+
+[node name="x" type="Line2D" parent="Rulers"]
+points = PackedVector2Array(10000, 0, -10000, 0)
+width = 0.5
+default_color = Color(1, 0, 0, 1)
+
+[node name="y" type="Line2D" parent="Rulers"]
+points = PackedVector2Array(0, 10000, 0, -10000)
+width = 0.5
+default_color = Color(0, 1, 0, 1)
+
+[node name="xy_labels" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_wowpa")]
+player = NodePath("../Player")
+
+[node name="path" parent="." instance=ExtResource("5_i6g32")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_3dryh")]
+player = NodePath("../../Player")
+
+[node name="floor" type="StaticBody2D" parent="."]
+position = Vector2(2, 108)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+shape = SubResource("WorldBoundaryShape2D_i6g32")

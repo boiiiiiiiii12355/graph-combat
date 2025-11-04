@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://olbouuixcjs4"]
+
+[sub_resource type="Curve2D" id="Curve2D_rg6wx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41.58, 0)
+}
+point_count = 2
+
+[node name="path" type="Path2D"]
+curve = SubResource("Curve2D_rg6wx")
+
+[node name="follow_this" type="PathFollow2D" parent="."]
+loop = false

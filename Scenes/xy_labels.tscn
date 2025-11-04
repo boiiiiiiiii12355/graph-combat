@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://jg3wydd1d6fe"]
+
+[ext_resource type="Script" uid="uid://71lc1w87stkn" path="res://scripts/xy_labels.gd" id="1_1d81y"]
+
+[node name="xy_labels" type="Control" node_paths=PackedStringArray("x_label", "y_label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1d81y")
+x_label = NodePath("x_label")
+y_label = NodePath("y_label")
+
+[node name="x_label" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 239.0
+offset_bottom = 37.0
+scale = Vector2(0.3, 0.3)
+
+[node name="y_label" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 275.0
+offset_bottom = 40.0
+scale = Vector2(0.3, 0.3)

@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://rqghv24q68xe"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_atpgl"]
+radius = 6.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aw0jv"]
+radius = 1.0
+height = 10.0
+
+[node name="Rope" type="Node2D"]
+process_mode = 1
+
+[node name="pin" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pin"]
+shape = SubResource("CapsuleShape2D_atpgl")
+
+[node name="Rope_seg1" type="RigidBody2D" parent="."]
+process_mode = 1
+position = Vector2(0, 13)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rope_seg1"]
+shape = SubResource("CapsuleShape2D_aw0jv")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Rope_seg1/CollisionShape2D"]
+position = Vector2(0, -13)
+node_a = NodePath("../../../pin")
+node_b = NodePath("../..")
+
+[node name="Rope_seg2" type="RigidBody2D" parent="."]
+process_mode = 1
+position = Vector2(0, 25)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rope_seg2"]
+shape = SubResource("CapsuleShape2D_aw0jv")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Rope_seg2/CollisionShape2D"]
+position = Vector2(0, -6)
+node_a = NodePath("../../../Rope_seg1")
+node_b = NodePath("../..")
+
+[node name="Rope_seg3" type="RigidBody2D" parent="."]
+process_mode = 1
+position = Vector2(0, 37)
+collision_layer = 0
+collision_mask = 0
+mass = 0.3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rope_seg3"]
+shape = SubResource("CapsuleShape2D_aw0jv")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Rope_seg3/CollisionShape2D"]
+position = Vector2(0.07536316, -5.9512787)
+node_a = NodePath("../../../Rope_seg2")
+node_b = NodePath("../..")
