@@ -5,6 +5,7 @@ extends Control
 func _ready() -> void:
 	_on_text_edit_text_changed()
 	paused = true
+	get_tree().paused = true
 	anim_player.play("pause")
 
 
@@ -13,10 +14,12 @@ func _physics_process(delta: float) -> void:
 	if typing == false:
 		if Input.is_action_just_pressed("pause") and paused == false:
 			paused = true
+			get_tree().paused = true
 			anim_player.play("pause")
 
 		elif Input.is_action_just_pressed("pause") and paused == true:
 			paused = false
+			get_tree().paused = false
 			anim_player.play("resume")
 	player.paused = paused
 

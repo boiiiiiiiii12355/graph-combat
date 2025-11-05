@@ -27,7 +27,7 @@ func init_path():
 func _physics_process(delta: float) -> void:
 	ruler()
 	graphing()
-	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.3)
+	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.2)
 	if paused == false:
 		movement()
 	elif paused:

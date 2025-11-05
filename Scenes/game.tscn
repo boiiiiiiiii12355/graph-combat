@@ -23,7 +23,7 @@ adjustment_contrast = 1.84
 
 [node name="grid" type="Parallax2D" parent="."]
 repeat_size = Vector2(1278.005, 766.015)
-repeat_times = 2
+repeat_times = 10
 
 [node name="grid_texture" type="TextureRect" parent="grid"]
 modulate = Color(0.32915837, 0.3291584, 0.3291584, 1)
@@ -41,10 +41,10 @@ path = NodePath("../path")
 cam = NodePath("../math_camera")
 
 [node name="punching_bag" parent="." instance=ExtResource("7_1l0tm")]
-process_mode = 1
 position = Vector2(181, -51)
 
 [node name="math_camera" parent="." node_paths=PackedStringArray("p1", "p2") instance=ExtResource("3_3dryh")]
+process_mode = 3
 zoom = Vector2(3, 3)
 p1 = NodePath("../Player")
 p2 = NodePath("../punching_bag")

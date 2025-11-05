@@ -20,7 +20,7 @@ func juice(camera : Camera2D):
 	Engine.time_scale = 0.01
 	camera.max_zoom = 5
 	camera.camera_shake(true)
-	await get_tree().create_timer(0.02).timeout
+	await get_tree().create_timer(0.03).timeout
 	time_speed_set(1.0)
 	camera.max_zoom = .5
 	await get_tree().create_timer(0.1).timeout

@@ -83,53 +83,43 @@ offset_bottom = 40.0
 modulate = Color(1, 1, 1, 0.22352941)
 z_index = 10
 layout_mode = 0
-offset_left = 953.0
+offset_left = 1552.0
 offset_top = -5.0
-offset_right = 1230.0
-offset_bottom = 655.0
+offset_right = 1982.0
+offset_bottom = 1080.0
 color = Color(0.45490196, 0.45490196, 0.45490196, 1)
-
-[node name="input" type="TextEdit" parent="input"]
-layout_mode = 0
-offset_left = 1033.0
-offset_top = 52.0
-offset_right = 1226.0
-offset_bottom = 93.0
-text = "-x + 250"
-placeholder_text = "m * x + c
-"
-selecting_enabled = false
 
 [node name="Label" type="Label" parent="input"]
 layout_mode = 0
-offset_left = 989.0
+offset_left = 1604.0
 offset_top = 59.0
-offset_right = 1029.0
+offset_right = 1644.0
 offset_bottom = 82.0
 text = "f(x) ="
 
-[node name="MAG" type="Button" parent="input"]
-layout_mode = 0
-offset_left = 961.0
-offset_top = 613.0
-offset_right = 1171.0
-offset_bottom = 644.0
-toggle_mode = true
-text = "move along graph (debug)"
-
 [node name="Label2" type="Label" parent="input"]
 layout_mode = 0
-offset_left = 1032.0
+offset_left = 1647.0
 offset_top = 95.0
-offset_right = 1345.0
+offset_right = 1960.0
 offset_bottom = 144.0
 text = "tab to resume time
 and apply formula"
+
+[node name="input" type="TextEdit" parent="input"]
+layout_mode = 0
+offset_left = 1697.0
+offset_top = 52.0
+offset_right = 1890.0
+offset_bottom = 93.0
+text = "x ** 2 / 200 - 250"
+placeholder_text = "m * x + c
+"
+selecting_enabled = false
 
 [node name="graph_update" type="Timer" parent="input"]
 
 [connection signal="mouse_entered" from="input/input" to="." method="_on_input_mouse_entered"]
 [connection signal="mouse_exited" from="input/input" to="." method="_on_input_mouse_exited"]
 [connection signal="text_changed" from="input/input" to="." method="_on_text_edit_text_changed"]
-[connection signal="button_down" from="input/MAG" to="." method="_on_mag_button_down"]
 [connection signal="timeout" from="input/graph_update" to="." method="_on_graph_update_timeout"]
