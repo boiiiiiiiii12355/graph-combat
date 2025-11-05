@@ -30,9 +30,6 @@ func _physics_process(delta: float) -> void:
 	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.2)
 	if paused == false:
 		movement()
-	elif paused:
-		linear_velocity = Vector2.ZERO
-		global_position = path_follow.global_position
 
 
 var move_on_graph = false
@@ -48,9 +45,10 @@ func movement():
 	else:
 		gravity_scale = .3
 
-
+var stored_momentum : Vector2
 func rope_ride():
 	linear_velocity = (path_follow.global_position - global_position) * 100
+	stored_momentum = linear_velocity
 	angular_velocity = (rotation - path_follow.rotation) * 50
 	path_follow.progress += 10
 
@@ -116,8 +114,21 @@ func update_path(pt, req):
 	path.curve.set_point_position(pt, req)
 	graph_end = path.curve.get_baked_length()
 
+@export var hit_particle_effect = preload("res://Scenes/hit_particle.tscn")
+func hit_particle(subject):
+	hit_particle_effect.global_position = (global_position + subject.global_position) / 2
+	hit_particle_effect.look_at(subject.global_position)
+	hit_particle_effect.restart()
+	add_child(hit_particle_effect)
+
+
 @export var hit_sound : AudioStreamPlayer2D
 func _on_area_2d_area_entered(area : Area2D):
 	if area.is_in_group("p2"):
+		area.get_parent().angular_velocity = 50
+		print("curr velocity ", linear_velocity)
+		area.get_parent().linear_velocity = stored_momentum
+		stored_momentum = Vector2.ZERO
+		hit_particle(area)
 		gamemaster.juice(cam)
 		hit_sound.play()
