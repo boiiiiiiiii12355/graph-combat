@@ -8,7 +8,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4fixn"]
 size = Vector2(14, 14)
 
-[node name="punching_bag" type="CharacterBody2D"]
+[node name="punching_bag" type="RigidBody2D"]
 
 [node name="Player_detector" type="Area2D" parent="." groups=["p2"]]
 

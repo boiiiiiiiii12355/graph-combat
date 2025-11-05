@@ -4,7 +4,7 @@ extends RigidBody2D
 @export var ruler_y : Line2D
 @export var ruler_x_color = Color(0.788, 0.0, 0.0, 1.0)
 @export var ruler_y_color = Color(0.0, 0.672, 0.0, 1.0)
-@export var ruler_width = 0.4
+@export var ruler_width = 2
 var graph_end
 var paused = true
 
@@ -27,6 +27,7 @@ func init_path():
 func _physics_process(delta: float) -> void:
 	ruler()
 	graphing()
+	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.3)
 	if paused == false:
 		movement()
 	elif paused:
@@ -115,6 +116,8 @@ func update_path(pt, req):
 	path.curve.set_point_position(pt, req)
 	graph_end = path.curve.get_baked_length()
 
+@export var hit_sound : AudioStreamPlayer2D
 func _on_area_2d_area_entered(area : Area2D):
 	if area.is_in_group("p2"):
 		gamemaster.juice(cam)
+		hit_sound.play()

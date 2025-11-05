@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cl3mk4vqd4f8d"]
+[gd_scene load_steps=7 format=3 uid="uid://cl3mk4vqd4f8d"]
 
 [ext_resource type="Script" uid="uid://dp1jb811rclfc" path="res://scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://fjq81le8ad0p" path="res://icon.svg" id="1_v0iea"]
+[ext_resource type="AudioStream" uid="uid://dscw51wg5x2vs" path="res://sound_effects/hitHurt.wav" id="3_6t5aa"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cvnsp"]
 bounce = 0.5
@@ -10,17 +11,17 @@ bounce = 0.5
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(37, 35.5)
+size = Vector2(20.125, 19.9375)
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "graph")]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "graph", "hit_sound")]
 process_mode = 3
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_cvnsp")
 script = ExtResource("1_cvnsp")
 ruler_x = NodePath("Rulers/y")
 ruler_y = NodePath("Rulers/x")
-ruler_width = 0.5
 graph = NodePath("Rulers/graph")
+hit_sound = NodePath("HitHurt")
 
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(0, 18.892157, 18.892157, 1)
@@ -58,5 +59,8 @@ antialiased = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_cvnsp")
+
+[node name="HitHurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6t5aa")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

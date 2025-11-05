@@ -21,8 +21,7 @@ gamemaster="*res://scripts/game_master.gd"
 
 [display]
 
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/mode="canvas_items"
 
 [global_group]
 
