@@ -15,6 +15,10 @@ func _ready() -> void:
 	ruler_x.width = ruler_width
 	ruler_y.width = ruler_width
 	graph_mem.resize(graph.get_point_count())
+	anim_player = player_rig.get_child(0)
+	R_arm = player_rig.get_child(2)
+	L_arm = player_rig.get_child(3)
+	body = player_rig.get_child(4)
 	center_point = roundi((graph.get_point_count() + 1) / 2)
 
 
@@ -27,6 +31,7 @@ func init_path():
 func _physics_process(delta: float) -> void:
 	ruler()
 	graphing()
+	check_paused()
 	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.2)
 	if paused == false:
 		movement()
@@ -37,20 +42,49 @@ var accel = 600
 func movement():
 	if not path_follow.progress == graph_end:
 		gravity_scale = 0
+		body.freeze = false
 		rope_ride()
+		anim_control("grab_graph")
 
 
 	else:
 		gravity_scale = .3
+		body.global_position = lerp(body.global_position, global_position, 0.1)
+		body.freeze = true
+		anim_control("let_go")
 
 var stored_momentum : Vector2
 func rope_ride():
-	linear_velocity = (path_follow.global_position - global_position) * 100
+	var vel = (path_follow.global_position - global_position)
+	linear_velocity = vel * 100
+	angular_velocity += -(rotation - path_follow.rotation) 
 	stored_momentum = linear_velocity
-	angular_velocity = (rotation - path_follow.rotation) * 50
+	R_arm.linear_velocity = vel * 100
+	L_arm.linear_velocity = vel * 100
 	path_follow.progress += 10
-
-
+	
+var R_arm : RigidBody2D
+var L_arm : RigidBody2D
+var body : RigidBody2D
+func check_paused():
+	if paused:
+		R_arm.freeze = true
+		L_arm.freeze = true
+	else:
+		R_arm.freeze = false
+		L_arm.freeze = false
+		
+@export var player_rig : StaticBody2D
+var anim_player : AnimationPlayer
+var last_anim : String
+func anim_control(anim : String):
+	if last_anim != anim:
+		if anim_player.is_playing() == false:
+			anim_player.play(anim)
+	
+	if anim_player.current_animation:
+		last_anim = anim_player.current_animation
+		
 func ruler():
 	ruler_x.set_point_position(1, Vector2(global_position.x, 0))
 	ruler_x.set_point_position(0, global_position)

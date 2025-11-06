@@ -20,6 +20,7 @@ adjustment_enabled = true
 adjustment_contrast = 1.23
 
 [node name="Game" type="Node2D"]
+process_mode = 1
 
 [node name="grid" type="Parallax2D" parent="."]
 repeat_size = Vector2(1278.005, 766.015)

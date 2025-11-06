@@ -9,7 +9,7 @@ func _ready() -> void:
 	anim_player.play("pause")
 
 
-var paused = false
+var paused = true
 func _physics_process(delta: float) -> void:
 	if typing == false:
 		if Input.is_action_just_pressed("pause") and paused == false:

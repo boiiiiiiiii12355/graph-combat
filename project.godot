@@ -69,9 +69,15 @@ right={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="floor"
+2d_physics/layer_2="players"
+2d_physics/layer_3="hands"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
-anti_aliasing/quality/msaa_2d=3
+anti_aliasing/quality/screen_space_aa=2
