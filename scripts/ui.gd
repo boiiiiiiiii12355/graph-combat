@@ -29,22 +29,39 @@ func _physics_process(delta: float) -> void:
 
 func calc_y(x):
 	var y
-	if error == OK:
-		y = expression.execute([x])
-	if y and not expression.has_execute_failed():
+	if y_error == OK:
+		y = y_expression.execute([x])
+	if y and not y_expression.has_execute_failed():
 		return y
 	else:
 		return 0
 
+func calc_x():
+	pass
+	
+	
 @export var dir_input : TextEdit
-var expression = Expression.new()
-var error
+var y_expression = Expression.new()
+var y_check = RegEx.new()
+var x_expression = Expression.new()
+var x_check = RegEx.new()
+var y_error
+var x_error
 func _on_text_edit_text_changed() -> void:
-	var input_text = dir_input.text
-	calc_y(0)
 	player.path_follow.progress = 0
-	error = expression.parse(input_text, ["x"])
-
+	
+	y_check.compile("(?= x).*")
+	x_check.compile("(?<! =)")
+	
+	var input_text = dir_input.text
+	var input_y = y_check.search(input_text)
+	var input_x = x_check.search(input_text)
+	print(input_y.get_string())
+	print(input_x.get_string())
+	
+	
+	y_error = y_expression.parse(input_y.get_string(), ["x"])
+	x_error = x_expression.parse(input_x.get_string(), ["x"])
 
 
 var typing = false

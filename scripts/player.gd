@@ -2,8 +2,8 @@ extends RigidBody2D
 
 @export var ruler_x : Line2D
 @export var ruler_y : Line2D
-@export var ruler_x_color = Color(0.788, 0.0, 0.0, 1.0)
-@export var ruler_y_color = Color(0.0, 0.672, 0.0, 1.0)
+@export var ruler_x_color = Color(0.0, 0.373, 0.599, 1.0)
+@export var ruler_y_color = Color(0.0, 0.598, 0.951, 1.0)
 @export var ruler_width = 2
 var graph_end
 var paused = true
@@ -37,8 +37,6 @@ var accel = 600
 func movement():
 	if not path_follow.progress == graph_end:
 		gravity_scale = 0
-		print(path_follow.progress)
-		print(graph_end)
 		rope_ride()
 
 
@@ -114,19 +112,17 @@ func update_path(pt, req):
 	path.curve.set_point_position(pt, req)
 	graph_end = path.curve.get_baked_length()
 
-@export var hit_particle_effect = preload("res://Scenes/hit_particle.tscn")
+@export var hit_particle_effect : GPUParticles2D
 func hit_particle(subject):
 	hit_particle_effect.global_position = (global_position + subject.global_position) / 2
 	hit_particle_effect.look_at(subject.global_position)
 	hit_particle_effect.restart()
-	add_child(hit_particle_effect)
 
 
 @export var hit_sound : AudioStreamPlayer2D
 func _on_area_2d_area_entered(area : Area2D):
 	if area.is_in_group("p2"):
 		area.get_parent().angular_velocity = 50
-		print("curr velocity ", linear_velocity)
 		area.get_parent().linear_velocity = stored_momentum
 		stored_momentum = Vector2.ZERO
 		hit_particle(area)

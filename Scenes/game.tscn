@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c8pl2y15qc3en"]
 
+[ext_resource type="Texture2D" uid="uid://coccuu17omink" path="res://sbs_-_texture_grid_pack/512x512/Gray/Prototype_Grid_Gray_03-512x512.png" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cl3mk4vqd4f8d" path="res://Scenes/player.tscn" id="1_ebmjs"]
-[ext_resource type="Texture2D" uid="uid://dabhf7ituprnp" path="res://sbs_-_texture_grid_pack/128x128/Gray/Prototype_Grid_Gray_04-128x128.png" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://byugwkpud0is0" path="res://Scenes/math_camera.tscn" id="3_3dryh"]
 [ext_resource type="PackedScene" uid="uid://d3ixkjyjao54n" path="res://Scenes/ui.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://jg3wydd1d6fe" path="res://Scenes/xy_labels.tscn" id="4_wowpa"]
@@ -17,7 +17,7 @@ glow_intensity = 4.12
 glow_strength = 1.27
 glow_bloom = 1.0
 adjustment_enabled = true
-adjustment_contrast = 1.84
+adjustment_contrast = 1.23
 
 [node name="Game" type="Node2D"]
 
@@ -30,12 +30,10 @@ modulate = Color(0.32915837, 0.3291584, 0.3291584, 1)
 z_index = -100
 offset_right = 1282.0
 offset_bottom = 769.0
-texture = ExtResource("1_wrm1d")
+texture = ExtResource("1_1l0tm")
 stretch_mode = 1
 
 [node name="Player" parent="." node_paths=PackedStringArray("ui", "path", "cam") instance=ExtResource("1_ebmjs")]
-ruler_x_color = Color(0, 1, 0, 1)
-ruler_y_color = Color(1, 0, 0, 1)
 ui = NodePath("../CanvasLayer/UI")
 path = NodePath("../path")
 cam = NodePath("../math_camera")

@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4ciaybjo0ryg"]
+
+[ext_resource type="Texture2D" uid="uid://chhodrxbdbmcs" path="res://sprite_sheet/beta_sprite_sheet.svg" id="1_nqn4a"]
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_78x28"]
+
+[node name="Skeleton2D" type="Skeleton2D"]
+modification_stack = SubResource("SkeletonModificationStack2D_78x28")
+
+[node name="main_body" type="Bone2D" parent="."]
+rotation = 1.5697316
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.0010647335, 0.9999994, -0.9999994, 0.0010647335, 0, 0)
+
+[node name="BetaSpriteSheet" type="Sprite2D" parent="main_body"]
+position = Vector2(0, 5.722046e-06)
+rotation = -1.5703804
+scale = Vector2(0.17496225, 0.17496225)
+skew = 0.0023099184
+texture = ExtResource("1_nqn4a")
+region_enabled = true
+region_rect = Rect2(285.27, 103.9, 487.63004, 484.70004)
+
+[node name="left_arm" type="Bone2D" parent="main_body"]
+position = Vector2(12.940368, 56.013813)
+rest = Transform2D(1, 0, 0, 1, 12.940368, 56.013813)
+
+[node name="R_arm" type="Sprite2D" parent="main_body/left_arm"]
+position = Vector2(0.6830673, -0.021308899)
+scale = Vector2(0.30042404, 0.30042404)
+texture = ExtResource("1_nqn4a")
+region_enabled = true
+region_rect = Rect2(980.237, 140.90356, 100.9422, 100.2413)
+
+[node name="right_arm" type="Bone2D" parent="main_body"]
+position = Vector2(13.694485, -55.962715)
+rest = Transform2D(1, 0, 0, 1, 13.694485, -55.962715)
+
+[node name="L_arm" type="Sprite2D" parent="main_body/right_arm"]
+position = Vector2(0.3651333, -0.022342682)
+scale = Vector2(0.30042404, 0.30042404)
+texture = ExtResource("1_nqn4a")
+region_enabled = true
+region_rect = Rect2(980.237, 140.90356, 100.9422, 100.2413)

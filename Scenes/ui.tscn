@@ -89,14 +89,6 @@ offset_right = 1982.0
 offset_bottom = 1080.0
 color = Color(0.45490196, 0.45490196, 0.45490196, 1)
 
-[node name="Label" type="Label" parent="input"]
-layout_mode = 0
-offset_left = 1604.0
-offset_top = 59.0
-offset_right = 1644.0
-offset_bottom = 82.0
-text = "f(x) ="
-
 [node name="Label2" type="Label" parent="input"]
 layout_mode = 0
 offset_left = 1647.0
@@ -108,12 +100,12 @@ and apply formula"
 
 [node name="input" type="TextEdit" parent="input"]
 layout_mode = 0
-offset_left = 1697.0
+offset_left = 1604.0
 offset_top = 52.0
 offset_right = 1890.0
 offset_bottom = 93.0
-text = "x ** 2 / 200 - 250"
-placeholder_text = "m * x + c
+text = "f(x) = x ** 2 / 200 - 250"
+placeholder_text = "f(x) = m * x + c
 "
 selecting_enabled = false
 
