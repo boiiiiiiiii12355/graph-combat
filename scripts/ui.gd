@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("pause") and paused == false:
 			paused = true
 			get_tree().paused = true
-			gamemaster.time_speed_set(0)
+			gamemaster.time_speed_set(0.1)
 			anim_player.play("pause")
 
 		elif Input.is_action_just_pressed("pause") and paused == true:
@@ -23,6 +23,7 @@ func _physics_process(delta: float) -> void:
 			get_tree().paused = false
 			gamemaster.time_speed_set(1)
 			anim_player.play("resume")
+			
 	player.paused = paused
 
 @export var anim_player : AnimationPlayer

@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://olbouuixcjs4"]
+[gd_scene load_steps=3 format=3 uid="uid://olbouuixcjs4"]
+
+[ext_resource type="Texture2D" uid="uid://fjq81le8ad0p" path="res://icon.svg" id="1_58riu"]
 
 [sub_resource type="Curve2D" id="Curve2D_rg6wx"]
 _data = {
@@ -11,3 +13,8 @@ curve = SubResource("Curve2D_rg6wx")
 
 [node name="follow_this" type="PathFollow2D" parent="."]
 loop = false
+
+[node name="Icon" type="Sprite2D" parent="follow_this"]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_58riu")

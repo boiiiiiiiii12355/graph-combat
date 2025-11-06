@@ -67,12 +67,16 @@ var R_arm : RigidBody2D
 var L_arm : RigidBody2D
 var body : RigidBody2D
 func check_paused():
-	if paused:
+	if paused == true:
 		R_arm.freeze = true
 		L_arm.freeze = true
+		R_arm.sleeping = true
+		L_arm.sleeping = true
 	else:
 		R_arm.freeze = false
 		L_arm.freeze = false
+		R_arm.sleeping = false
+		L_arm.sleeping = false
 		
 @export var player_rig : StaticBody2D
 var anim_player : AnimationPlayer

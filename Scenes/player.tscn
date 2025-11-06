@@ -12,9 +12,10 @@ bounce = 0.5
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(20.125, 19.9375)
+size = Vector2(18.0625, 17.96875)
 
 [node name="Player" type="RigidBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "player_rig", "graph", "hit_particle_effect", "hit_sound")]
+process_mode = 3
 collision_layer = 2
 collision_mask = 3
 mass = 0.1
