@@ -23,11 +23,10 @@ func _physics_process(delta: float) -> void:
 			get_tree().paused = false
 			gamemaster.time_speed_set(1)
 			anim_player.play("resume")
-			
+	player.graphing()
 	player.paused = paused
-
+	
 @export var anim_player : AnimationPlayer
-
 func calc_y(x):
 	var y
 	if y_error == OK:

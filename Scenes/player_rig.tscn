@@ -59,7 +59,7 @@ region_rect = Rect2(980.237, 140.90356, 100.9422, 100.2413)
 shape = SubResource("RectangleShape2D_78x28")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="R_arm"]
-position = Vector2(17, 0)
+position = Vector2(20, 0)
 node_a = NodePath("../../body")
 node_b = NodePath("..")
 bias = 0.9
@@ -84,7 +84,7 @@ region_rect = Rect2(980.237, 140.90356, 100.9422, 100.2413)
 shape = SubResource("RectangleShape2D_78x28")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="L_arm"]
-position = Vector2(-17, 0)
+position = Vector2(-20, 0)
 node_a = NodePath("../../body")
 node_b = NodePath("..")
 bias = 0.9
@@ -93,7 +93,6 @@ softness = 8.0
 [node name="body" type="RigidBody2D" parent="."]
 collision_layer = 0
 collision_mask = 0
-mass = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
 shape = SubResource("RectangleShape2D_nqn4a")

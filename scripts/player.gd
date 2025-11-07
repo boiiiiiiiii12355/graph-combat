@@ -9,7 +9,6 @@ var graph_end
 var paused = true
 
 func _ready() -> void:
-	init_path()
 	ruler_x.default_color = ruler_x_color
 	ruler_y.default_color = ruler_y_color
 	ruler_x.width = ruler_width
@@ -19,6 +18,7 @@ func _ready() -> void:
 	R_arm = player_rig.get_child(2)
 	L_arm = player_rig.get_child(3)
 	body = player_rig.get_child(4)
+	init_path()
 	center_point = roundi((graph.get_point_count() + 1) / 2)
 
 
@@ -30,11 +30,12 @@ func init_path():
 
 func _physics_process(delta: float) -> void:
 	ruler()
-	graphing()
-	check_paused()
 	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.2)
 	if paused == false:
 		movement()
+		oracle(false)
+	else:
+		oracle(true)
 
 
 var move_on_graph = false
@@ -67,21 +68,11 @@ func rope_ride():
 	stored_momentum = linear_velocity
 	path_follow.progress += 10
 	
+	
+	
 var R_arm : RigidBody2D
 var L_arm : RigidBody2D
 var body : RigidBody2D
-func check_paused():
-	if paused == true:
-		R_arm.freeze = true
-		L_arm.freeze = true
-		R_arm.sleeping = true
-		L_arm.sleeping = true
-	else:
-		R_arm.freeze = false
-		L_arm.freeze = false
-		R_arm.sleeping = false
-		L_arm.sleeping = false
-		
 @export var player_rig : StaticBody2D
 var anim_player : AnimationPlayer
 var last_anim : String
@@ -146,6 +137,20 @@ func graphing():
 
 
 
+#oracle predicts player movement when paused
+@export var oracle_agent : RigidBody2D
+var last_paused = false
+func oracle(switch : bool):
+	if switch:
+		path_follow.progress += 10
+		last_paused = true
+		oracle_agent.freeze = false
+		
+	elif last_paused == true:
+		last_paused = false
+		oracle_agent.freeze = true
+	
+
 func update_graph(pt, req):
 	var curr_pos = graph.get_point_position(pt)
 	graph.set_point_position(pt, lerp(curr_pos, req, lerp_weight))
@@ -159,7 +164,6 @@ func hit_particle(subject):
 	hit_particle_effect.global_position = (global_position + subject.global_position) / 2
 	hit_particle_effect.look_at(subject.global_position)
 	hit_particle_effect.restart()
-
 
 @export var hit_sound : AudioStreamPlayer2D
 func _on_area_2d_area_entered(area : Area2D):
