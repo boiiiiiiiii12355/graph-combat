@@ -137,7 +137,7 @@ func graphing():
 
 
 
-#oracle predicts player movement when paused
+#oracle predicts player movement when paused (not done yet)
 @export var oracle_agent : RigidBody2D
 var last_paused = false
 func oracle(switch : bool):
