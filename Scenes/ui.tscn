@@ -30,7 +30,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(2.5491211, 1),
 "update": 0,
-"values": [Vector2(264, 0), Vector2(-75.215, 0)]
+"values": [Vector2(441.62, 0), Vector2(-75.215, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_nf4gj"]
@@ -46,7 +46,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-75.215, 0), Vector2(264, 0)]
+"values": [Vector2(-75.215, 0), Vector2(435, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nf4gj"]
@@ -91,12 +91,21 @@ color = Color(0.45490196, 0.45490196, 0.45490196, 1)
 
 [node name="Label2" type="Label" parent="input"]
 layout_mode = 0
-offset_left = 1647.0
-offset_top = 95.0
-offset_right = 1960.0
-offset_bottom = 144.0
+offset_left = 1588.0
+offset_top = 94.0
+offset_right = 1926.0
+offset_bottom = 351.0
 text = "tab to resume time
-and apply formula"
+and apply formula
+press tab again to pause
+
+some tips:
+- graph can be moved horizontaly by adding
+numbers to x in f(x)
+
+- if you want to use powers try x ** 2
+
+- forcos and sin its cos(x) and sin(x)"
 
 [node name="input" type="TextEdit" parent="input"]
 layout_mode = 0

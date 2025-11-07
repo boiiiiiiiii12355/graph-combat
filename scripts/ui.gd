@@ -37,8 +37,14 @@ func calc_y(x):
 	else:
 		return 0
 
-func calc_x():
-	pass
+func calc_x(curr_x):
+	var x
+	if x_error == OK:
+		x = x_expression.execute([curr_x])
+	if x and not x_expression.has_execute_failed():
+		return x
+	else:
+		return 0
 	
 	
 @export var dir_input : TextEdit
@@ -51,18 +57,16 @@ var x_error
 func _on_text_edit_text_changed() -> void:
 	player.path_follow.progress = 0
 	
-	y_check.compile("(?= x).*")
-	x_check.compile("(?<! =)")
+	y_check.compile("(?<= =).*")
+	x_check.compile("(?<=f\\().*?(?=\\))")
 	
 	var input_text = dir_input.text
 	var input_y = y_check.search(input_text)
 	var input_x = x_check.search(input_text)
-	print(input_y.get_string())
-	print(input_x.get_string())
 	
-	
-	y_error = y_expression.parse(input_y.get_string(), ["x"])
-	x_error = x_expression.parse(input_x.get_string(), ["x"])
+	if input_x and input_y:
+		y_error = y_expression.parse(input_y.get_string(), ["x"])
+		x_error = x_expression.parse(input_x.get_string(), ["x"])
 
 
 var typing = false

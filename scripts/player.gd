@@ -42,6 +42,8 @@ var accel = 600
 func movement():
 	if not path_follow.progress == graph_end:
 		gravity_scale = 0
+		R_arm.gravity_scale = 0
+		L_arm.gravity_scale = 0
 		body.freeze = false
 		rope_ride()
 		anim_control("grab_graph")
@@ -49,6 +51,8 @@ func movement():
 
 	else:
 		gravity_scale = .3
+		R_arm.gravity_scale = .3
+		L_arm.gravity_scale = .3
 		body.global_position = lerp(body.global_position, global_position, 0.1)
 		body.freeze = true
 		anim_control("let_go")
@@ -56,11 +60,11 @@ func movement():
 var stored_momentum : Vector2
 func rope_ride():
 	var vel = (path_follow.global_position - global_position)
-	linear_velocity = vel * 100
-	angular_velocity += -(rotation - path_follow.rotation) 
+	linear_velocity = vel * 100 
+	angular_velocity += -(rotation - path_follow.rotation) * 10
+	R_arm.global_position = lerp(R_arm.global_position, path_follow.global_position, 0.7)
+	L_arm.global_position = lerp(L_arm.global_position, path_follow.global_position, 0.7)
 	stored_momentum = linear_velocity
-	R_arm.linear_velocity = vel * 100
-	L_arm.linear_velocity = vel * 100
 	path_follow.progress += 10
 	
 var R_arm : RigidBody2D
@@ -122,12 +126,12 @@ func graphing():
 		var pt_x
 		var pt_y
 		if pt == center_point:
-			pt_x = 0
-			pt_y = ui.calc_y(pt_x)
+			pt_x = ui.calc_x(0)
+			pt_y = ui.calc_y(0)
 
 		elif pt < center_point  or  pt > center_point:
-			pt_x = offset *(pt - center_point)
-			pt_y = ui.calc_y(pt_x)
+			pt_x = ui.calc_x(offset *(pt - center_point))
+			pt_y = ui.calc_y(offset *(pt - center_point))
 
 
 		var req = Vector2(pt_x, -pt_y)
