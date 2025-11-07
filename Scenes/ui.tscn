@@ -56,7 +56,7 @@ _data = {
 &"resume": SubResource("Animation_nf4gj")
 }
 
-[node name="UI" type="Control" node_paths=PackedStringArray("anim_player", "dir_input")]
+[node name="UI" type="Control" node_paths=PackedStringArray("dir_toggle", "anim_player", "dir_input")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -65,6 +65,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jxero")
+dir_toggle = NodePath("input/opposite direction")
 anim_player = NodePath("AnimationPlayer")
 dir_input = NodePath("input/input")
 
@@ -89,7 +90,7 @@ offset_right = 1982.0
 offset_bottom = 1080.0
 color = Color(0.45490196, 0.45490196, 0.45490196, 1)
 
-[node name="Label2" type="Label" parent="input"]
+[node name="tips" type="Label" parent="input"]
 layout_mode = 0
 offset_left = 1588.0
 offset_top = 94.0
@@ -107,6 +108,21 @@ numbers to x in f(x)
 
 - forcos and sin its cos(x) and sin(x)"
 
+[node name="opposite direction" type="CheckButton" parent="input"]
+layout_mode = 0
+offset_left = 1803.0
+offset_top = 106.0
+offset_right = 1847.0
+offset_bottom = 130.0
+button_pressed = true
+
+[node name="Label" type="Label" parent="input/opposite direction"]
+layout_mode = 0
+offset_left = 44.0
+offset_right = 150.0
+offset_bottom = 23.0
+text = "flip direction?"
+
 [node name="input" type="TextEdit" parent="input"]
 layout_mode = 0
 offset_left = 1604.0
@@ -120,6 +136,7 @@ selecting_enabled = false
 
 [node name="graph_update" type="Timer" parent="input"]
 
+[connection signal="toggled" from="input/opposite direction" to="." method="_on_opposite_direction_toggled"]
 [connection signal="mouse_entered" from="input/input" to="." method="_on_input_mouse_entered"]
 [connection signal="mouse_exited" from="input/input" to="." method="_on_input_mouse_exited"]
 [connection signal="text_changed" from="input/input" to="." method="_on_text_edit_text_changed"]

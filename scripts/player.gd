@@ -31,43 +31,55 @@ func init_path():
 func _physics_process(delta: float) -> void:
 	ruler()
 	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.2)
-	if paused == false:
-		movement()
-		oracle(false)
-	else:
-		oracle(true)
 
 
 var move_on_graph = false
 var accel = 600
-func movement():
-	if not path_follow.progress == graph_end:
-		gravity_scale = 0
-		R_arm.gravity_scale = 0
-		L_arm.gravity_scale = 0
-		body.freeze = false
-		rope_ride()
-		anim_control("grab_graph")
-
-
-	else:
-		gravity_scale = .3
-		R_arm.gravity_scale = .3
-		L_arm.gravity_scale = .3
-		body.global_position = lerp(body.global_position, global_position, 0.1)
-		body.freeze = true
-		anim_control("let_go")
-
+func movement(graph_zip_dir : String):
+	if graph_zip_dir == "right":
+		if not path_follow.progress >= graph_end:
+			gravity_scale = 0
+			R_arm.gravity_scale = 0
+			L_arm.gravity_scale = 0
+			body.freeze = false
+			rope_ride(graph_zip_dir)
+		else:
+			let_go()
+			
+	elif graph_zip_dir == "left":
+		if not path_follow.progress <= 0:
+			gravity_scale = 0
+			R_arm.gravity_scale = 0
+			L_arm.gravity_scale = 0
+			body.freeze = false
+			rope_ride(graph_zip_dir)
+		else:
+			let_go()
+			
+#run this when reaching end of graph
+func let_go():
+	gravity_scale = .3
+	R_arm.gravity_scale = .3
+	L_arm.gravity_scale = .3
+	body.global_position = lerp(body.global_position, global_position, 0.1)
+	body.freeze = true
+	anim_control("let_go")
+	
+	
 var stored_momentum : Vector2
-func rope_ride():
+var graph_zip_speed : int = 10
+func rope_ride(graph_zip_dir : String):
 	var vel = (path_follow.global_position - global_position)
 	linear_velocity = vel * 100 
 	angular_velocity += -(rotation - path_follow.rotation) * 10
 	R_arm.global_position = lerp(R_arm.global_position, path_follow.global_position, 0.7)
 	L_arm.global_position = lerp(L_arm.global_position, path_follow.global_position, 0.7)
 	stored_momentum = linear_velocity
-	path_follow.progress += 10
 	
+	if graph_zip_dir == "left":
+		path_follow.progress -= graph_zip_speed
+	elif graph_zip_dir == "right":
+		path_follow.progress += graph_zip_speed
 	
 	
 var R_arm : RigidBody2D
@@ -139,16 +151,8 @@ func graphing():
 
 #oracle predicts player movement when paused (not done yet)
 @export var oracle_agent : RigidBody2D
-var last_paused = false
 func oracle(switch : bool):
-	if switch:
-		path_follow.progress += 10
-		last_paused = true
-		oracle_agent.freeze = false
-		
-	elif last_paused == true:
-		last_paused = false
-		oracle_agent.freeze = true
+	pass
 	
 
 func update_graph(pt, req):

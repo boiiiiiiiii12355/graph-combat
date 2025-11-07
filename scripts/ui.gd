@@ -4,8 +4,8 @@ extends Control
 @export var view : Viewport
 func _ready() -> void:
 	_on_text_edit_text_changed()
-	paused = true
 	get_tree().paused = true
+	paused = true
 	anim_player.play("pause")
 
 
@@ -15,17 +15,28 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("pause") and paused == false:
 			paused = true
 			get_tree().paused = true
-			gamemaster.time_speed_set(0.1)
 			anim_player.play("pause")
 
 		elif Input.is_action_just_pressed("pause") and paused == true:
 			paused = false
 			get_tree().paused = false
-			gamemaster.time_speed_set(1)
 			anim_player.play("resume")
 	player.graphing()
 	player.paused = paused
-	
+	check_dir_time()
+
+#responsible for checking both time and direction of graph slide
+@export var dir_toggle : CheckButton
+func check_dir_time():
+	if not paused:
+		if dir_toggle.button_pressed:
+			var dir = "right"
+			player.movement(dir)
+		else:
+			var dir = "left"
+			player.movement(dir)
+			
+			
 @export var anim_player : AnimationPlayer
 func calc_y(x):
 	var y
@@ -54,8 +65,6 @@ var x_check = RegEx.new()
 var y_error
 var x_error
 func _on_text_edit_text_changed() -> void:
-	player.path_follow.progress = 0
-	
 	y_check.compile("(?<= =).*")
 	x_check.compile("(?<=f\\().*?(?=\\))")
 	
@@ -83,3 +92,10 @@ func _on_input_mouse_exited() -> void:
 
 func _on_mag_button_down() -> void:
 	player.movement()
+
+
+func _on_opposite_direction_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		player.path_follow.progress = 0
+	else:
+		player.path_follow.progress = player.graph_end

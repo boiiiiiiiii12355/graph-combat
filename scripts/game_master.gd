@@ -13,6 +13,7 @@ func _ready() -> void:
 
 
 func time_speed_set(_0to1_ : float):
+	print("set")
 	time_value = _0to1_
 
 func juice(camera : Camera2D):
