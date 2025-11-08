@@ -3,7 +3,7 @@ extends Node2D
 
 var time_value = 1
 var accel = 0.1
-
+var current_turn : String = "P1"
 func _physics_process(delta: float) -> void:
 	Engine.time_scale = lerp(Engine.time_scale, time_value, accel)
 

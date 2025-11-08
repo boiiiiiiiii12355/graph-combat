@@ -1,3 +1,4 @@
+class_name player_1
 extends RigidBody2D
 
 @export var ruler_x : Line2D

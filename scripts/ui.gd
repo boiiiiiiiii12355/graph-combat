@@ -58,6 +58,8 @@ func calc_x(curr_x):
 	
 	
 @export var dir_input : TextEdit
+@export var p1_input : TextEdit
+@export var p2_input : TextEdit
 var y_expression = Expression.new()
 var y_check = RegEx.new()
 var x_expression = Expression.new()
@@ -67,10 +69,14 @@ var x_error
 func _on_text_edit_text_changed() -> void:
 	y_check.compile("(?<= =).*")
 	x_check.compile("(?<=f\\().*?(?=\\))")
-	
-	var input_text = dir_input.text
-	var input_y = y_check.search(input_text)
-	var input_x = x_check.search(input_text)
+	var input_text
+	var input_y
+	var input_x
+		
+	if dir_input:
+		input_text = dir_input.text
+		input_y = y_check.search(input_text)
+		input_x = x_check.search(input_text)
 	
 	if input_x and input_y:
 		y_error = y_expression.parse(input_y.get_string(), ["x"])

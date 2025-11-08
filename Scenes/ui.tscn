@@ -7,7 +7,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("input:position")
+tracks/0/path = NodePath("input p1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +23,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("input:position")
+tracks/0/path = NodePath("input p1:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -39,7 +39,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("input:position")
+tracks/0/path = NodePath("input p1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -56,7 +56,7 @@ _data = {
 &"resume": SubResource("Animation_nf4gj")
 }
 
-[node name="UI" type="Control" node_paths=PackedStringArray("dir_toggle", "anim_player", "dir_input")]
+[node name="UI" type="Control" node_paths=PackedStringArray("dir_toggle", "anim_player", "p1_input", "p2_input")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -65,9 +65,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jxero")
-dir_toggle = NodePath("input/opposite direction")
+dir_toggle = NodePath("input p1/opposite direction")
 anim_player = NodePath("AnimationPlayer")
-dir_input = NodePath("input/input")
+p1_input = NodePath("input p1/input")
+p2_input = NodePath("input p2/input")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -75,12 +76,12 @@ libraries = {
 }
 movie_quit_on_finish = true
 
-[node name="input" type="Control" parent="."]
+[node name="input p1" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.00009
 offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="input"]
+[node name="ColorRect" type="ColorRect" parent="input p1"]
 modulate = Color(1, 1, 1, 0.22352941)
 z_index = 10
 layout_mode = 0
@@ -90,7 +91,7 @@ offset_right = 1982.0
 offset_bottom = 1080.0
 color = Color(0.45490196, 0.45490196, 0.45490196, 1)
 
-[node name="tips" type="Label" parent="input"]
+[node name="tips" type="Label" parent="input p1"]
 layout_mode = 0
 offset_left = 1588.0
 offset_top = 94.0
@@ -108,7 +109,7 @@ numbers to x in f(x)
 
 - forcos and sin its cos(x) and sin(x)"
 
-[node name="opposite direction" type="CheckButton" parent="input"]
+[node name="opposite direction" type="CheckButton" parent="input p1"]
 layout_mode = 0
 offset_left = 1803.0
 offset_top = 106.0
@@ -116,14 +117,14 @@ offset_right = 1847.0
 offset_bottom = 130.0
 button_pressed = true
 
-[node name="Label" type="Label" parent="input/opposite direction"]
+[node name="Label" type="Label" parent="input p1/opposite direction"]
 layout_mode = 0
 offset_left = 44.0
 offset_right = 150.0
 offset_bottom = 23.0
 text = "flip direction?"
 
-[node name="input" type="TextEdit" parent="input"]
+[node name="input" type="TextEdit" parent="input p1"]
 layout_mode = 0
 offset_left = 1604.0
 offset_top = 52.0
@@ -134,10 +135,71 @@ placeholder_text = "f(x) = m * x + c
 "
 selecting_enabled = false
 
-[node name="graph_update" type="Timer" parent="input"]
+[node name="graph_update" type="Timer" parent="input p1"]
 
-[connection signal="toggled" from="input/opposite direction" to="." method="_on_opposite_direction_toggled"]
-[connection signal="mouse_entered" from="input/input" to="." method="_on_input_mouse_entered"]
-[connection signal="mouse_exited" from="input/input" to="." method="_on_input_mouse_exited"]
-[connection signal="text_changed" from="input/input" to="." method="_on_text_edit_text_changed"]
-[connection signal="timeout" from="input/graph_update" to="." method="_on_graph_update_timeout"]
+[node name="input p2" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.00009
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="input p2"]
+modulate = Color(1, 1, 1, 0.22352941)
+z_index = 10
+layout_mode = 0
+offset_left = 1552.0
+offset_top = -5.0
+offset_right = 1982.0
+offset_bottom = 1080.0
+color = Color(0.45490196, 0.45490196, 0.45490196, 1)
+
+[node name="tips" type="Label" parent="input p2"]
+layout_mode = 0
+offset_left = 1588.0
+offset_top = 94.0
+offset_right = 1926.0
+offset_bottom = 351.0
+text = "tab to resume time
+and apply formula
+press tab again to pause
+
+some tips:
+- graph can be moved horizontaly by adding
+numbers to x in f(x)
+
+- if you want to use powers try x ** 2
+
+- forcos and sin its cos(x) and sin(x)"
+
+[node name="opposite direction" type="CheckButton" parent="input p2"]
+layout_mode = 0
+offset_left = 1803.0
+offset_top = 106.0
+offset_right = 1847.0
+offset_bottom = 130.0
+button_pressed = true
+
+[node name="Label" type="Label" parent="input p2/opposite direction"]
+layout_mode = 0
+offset_left = 44.0
+offset_right = 150.0
+offset_bottom = 23.0
+text = "flip direction?"
+
+[node name="input" type="TextEdit" parent="input p2"]
+layout_mode = 0
+offset_left = 1604.0
+offset_top = 52.0
+offset_right = 1890.0
+offset_bottom = 93.0
+text = "f(x) = x ** 2 / 200 - 250"
+placeholder_text = "f(x) = m * x + c
+"
+selecting_enabled = false
+
+[node name="graph_update" type="Timer" parent="input p2"]
+
+[connection signal="toggled" from="input p1/opposite direction" to="." method="_on_opposite_direction_toggled"]
+[connection signal="mouse_entered" from="input p1/input" to="." method="_on_input_mouse_entered"]
+[connection signal="mouse_exited" from="input p1/input" to="." method="_on_input_mouse_exited"]
+[connection signal="text_changed" from="input p1/input" to="." method="_on_text_edit_text_changed"]
+[connection signal="timeout" from="input p1/graph_update" to="." method="_on_graph_update_timeout"]

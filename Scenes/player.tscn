@@ -12,9 +12,9 @@ bounce = 0.5
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(18.0625, 17.96875)
+size = Vector2(16.03125, 15.984375)
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "player_rig", "graph", "oracle_agent", "hit_particle_effect", "hit_sound")]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "player_rig", "graph", "hit_particle_effect", "hit_sound")]
 collision_layer = 2
 collision_mask = 3
 mass = 0.1
@@ -24,7 +24,6 @@ ruler_x = NodePath("Rulers/y")
 ruler_y = NodePath("Rulers/x")
 player_rig = NodePath("player_rig")
 graph = NodePath("Rulers/graph")
-oracle_agent = NodePath("")
 hit_particle_effect = NodePath("GPUParticles2D")
 hit_sound = NodePath("HitHurt")
 
