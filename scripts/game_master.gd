@@ -7,6 +7,9 @@ var current_turn : String = "P1"
 func _physics_process(delta: float) -> void:
 	Engine.time_scale = lerp(Engine.time_scale, time_value, accel)
 
+func turn_mang():
+	pass
+	
 func _ready() -> void:
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
 	time_speed_set(1)

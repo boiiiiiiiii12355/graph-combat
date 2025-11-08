@@ -89,7 +89,7 @@ offset_left = 1552.0
 offset_top = -5.0
 offset_right = 1982.0
 offset_bottom = 1080.0
-color = Color(0.45490196, 0.45490196, 0.45490196, 1)
+color = Color(1.347661e-06, 0.7425437, 0.9715503, 1)
 
 [node name="tips" type="Label" parent="input p1"]
 layout_mode = 0
@@ -150,7 +150,7 @@ offset_left = 1552.0
 offset_top = -5.0
 offset_right = 1982.0
 offset_bottom = 1080.0
-color = Color(0.45490196, 0.45490196, 0.45490196, 1)
+color = Color(0.8901961, 0.105882354, 0, 1)
 
 [node name="tips" type="Label" parent="input p2"]
 layout_mode = 0

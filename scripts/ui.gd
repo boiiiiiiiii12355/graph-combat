@@ -12,12 +12,12 @@ func _ready() -> void:
 var paused = true
 func _physics_process(delta: float) -> void:
 	if typing == false:
-		if Input.is_action_just_pressed("pause") and paused == false:
-			paused = true
-			get_tree().paused = true
-			anim_player.play("pause")
+		#if Input.is_action_just_pressed("pause") and paused == false:
+			#paused = true
+			#get_tree().paused = true
+			#anim_player.play("pause")
 
-		elif Input.is_action_just_pressed("pause") and paused == true:
+		if Input.is_action_just_pressed("pause") and paused == true:
 			paused = false
 			get_tree().paused = false
 			anim_player.play("resume")
