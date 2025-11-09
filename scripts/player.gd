@@ -1,6 +1,7 @@
 class_name player_1
 extends RigidBody2D
 
+@export var playerid : String
 @export var ruler_x : Line2D
 @export var ruler_y : Line2D
 @export var ruler_x_color = Color(0.0, 0.373, 0.599, 1.0)

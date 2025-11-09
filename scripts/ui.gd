@@ -1,16 +1,18 @@
 extends Control
 
+@export var player1 : RigidBody2D
+@export var player2 : RigidBody2D
 @export var player : RigidBody2D
 @export var view : Viewport
 func _ready() -> void:
 	_on_text_edit_text_changed()
 	get_tree().paused = true
 	paused = true
-	anim_player.play("pause")
 
 
 var paused = true
 func _physics_process(delta: float) -> void:
+	ui_ctrl()
 	if typing == false:
 		#if Input.is_action_just_pressed("pause") and paused == false:
 			#paused = true
@@ -18,12 +20,50 @@ func _physics_process(delta: float) -> void:
 			#anim_player.play("pause")
 
 		if Input.is_action_just_pressed("pause") and paused == true:
-			paused = false
-			get_tree().paused = false
-			anim_player.play("resume")
-	player.graphing()
-	player.paused = paused
-	check_dir_time()
+			gamemaster.next_turn()
+			
+			
+	if player:
+		player.graphing()
+		player.paused = paused
+		
+		check_dir_time()
+	else:
+		print(current_turn)
+	
+
+
+
+
+var current_turn
+var resume_pos = Vector2(500, 0)
+func ui_ctrl():
+	current_turn = gamemaster.current_turn
+	var p2_parent = p2_input.get_parent()
+	var p1_parent = p1_input.get_parent()
+	
+	if current_turn == "P1":
+		dir_input = p1_input
+		player = player1
+		p1_parent.global_position = lerp(p1_parent.global_position, Vector2(0, 0), 0.1)
+	else:
+		p1_parent.global_position = lerp(p1_parent.global_position, resume_pos, 0.1)
+		
+	if current_turn == "P2":
+		dir_input = p2_input
+		player = player2
+		p2_parent.global_position = lerp(p2_parent.global_position, Vector2(0, 0), 0.1)
+	else:
+		p2_parent.global_position = lerp(p2_parent.global_position, resume_pos, 0.1)
+
+	if current_turn == "Combat":
+		get_tree().paused = false
+		paused = false
+	else:
+		get_tree().paused = true
+		paused = true
+
+
 
 #responsible for checking both time and direction of graph slide
 @export var dir_toggle : CheckButton
@@ -37,7 +77,7 @@ func check_dir_time():
 			player.movement(dir)
 			
 			
-@export var anim_player : AnimationPlayer
+
 func calc_y(x):
 	var y
 	if y_error == OK:

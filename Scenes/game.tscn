@@ -34,7 +34,7 @@ offset_bottom = 769.0
 texture = ExtResource("1_1l0tm")
 stretch_mode = 1
 
-[node name="Player" parent="." node_paths=PackedStringArray("ui", "path", "cam") instance=ExtResource("1_ebmjs")]
+[node name="Player1" parent="." node_paths=PackedStringArray("ui", "path", "cam") instance=ExtResource("1_ebmjs")]
 ui = NodePath("../CanvasLayer/UI")
 path = NodePath("../path")
 cam = NodePath("../math_camera")
@@ -45,7 +45,7 @@ position = Vector2(181, -51)
 [node name="math_camera" parent="." node_paths=PackedStringArray("p1", "p2") instance=ExtResource("3_3dryh")]
 process_mode = 3
 zoom = Vector2(3, 3)
-p1 = NodePath("../Player")
+p1 = NodePath("../Player1")
 p2 = NodePath("../punching_bag")
 
 [node name="Rulers" type="Node2D" parent="."]
@@ -61,7 +61,7 @@ width = 0.5
 default_color = Color(0, 1, 0, 1)
 
 [node name="xy_labels" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_wowpa")]
-player = NodePath("../Player")
+player = NodePath("../Player1")
 
 [node name="path" parent="." instance=ExtResource("5_i6g32")]
 
@@ -76,5 +76,5 @@ environment = SubResource("Environment_1l0tm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_3dryh")]
-player = NodePath("../../Player")
+[node name="UI" parent="CanvasLayer" node_paths=PackedStringArray("player1") instance=ExtResource("4_3dryh")]
+player1 = NodePath("../../Player1")
