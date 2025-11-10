@@ -6,13 +6,18 @@ extends RigidBody2D
 @export var player2_color : Color = Color(1.0, 0.0, 0.0, 1.0)
 @export var ruler_x : Line2D
 @export var ruler_y : Line2D
+@export var ruler_x_color_p2 = Color(0.655, 0.0, 0.0, 1.0)
+@export var ruler_y_color_p2 = Color(1.0, 0.263, 0.0, 1.0)
+@export var ruler_x_color_p1 = Color(0.0, 0.373, 0.599, 1.0)
+@export var ruler_y_color_p1 = Color(0.0, 0.598, 0.951, 1.0)
 @export var ruler_x_color = Color(0.0, 0.373, 0.599, 1.0)
 @export var ruler_y_color = Color(0.0, 0.598, 0.951, 1.0)
+@export var area_2d : Area2D
 @export var ruler_width = 2
 var current_turn : int
 var graph_end
 var paused = true
-
+var opposition : String
 func _ready() -> void:
 	ruler_x.default_color = ruler_x_color
 	ruler_y.default_color = ruler_y_color
@@ -23,11 +28,24 @@ func _ready() -> void:
 	L_arm = player_rig.get_child(3)
 	body = player_rig.get_child(4)
 	init_path()
+	let_go()
 	center_point = roundi((graph.get_point_count() + 1) / 2)
 	if player_id == 1:
 		body.get_child(1).modulate = player1_color
+		area_2d.add_to_group("p1")
+		area_2d.remove_from_group("p2")
+		opposition = "p2"
+		ruler_x_color = ruler_x_color_p1
+		ruler_y_color = ruler_y_color_p1
+		print(opposition)
 	elif player_id == 2:
 		body.get_child(1).modulate = player2_color
+		area_2d.add_to_group("p2")
+		area_2d.remove_from_group("p1")
+		opposition = "p1"
+		ruler_x_color = ruler_x_color_p2
+		ruler_y_color = ruler_y_color_p2
+		print(opposition)
 
 func init_path():
 	path.curve.clear_points()
@@ -169,7 +187,7 @@ func hit_particle(subject):
 
 @export var hit_sound : AudioStreamPlayer2D
 func _on_area_2d_area_entered(area : Area2D):
-	if area.is_in_group("p2"):
+	if area.is_in_group(opposition):
 		area.get_parent().angular_velocity = 50
 		area.get_parent().linear_velocity = stored_momentum
 		stored_momentum = Vector2.ZERO

@@ -15,16 +15,17 @@ size = Vector2(14, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(16.03125, 15.984375)
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "player_rig", "graph", "path", "hit_particle_effect", "hit_sound")]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("ruler_x", "ruler_y", "area_2d", "player_rig", "graph", "path", "hit_particle_effect", "hit_sound")]
 collision_layer = 2
 collision_mask = 3
-mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_cvnsp")
+gravity_scale = 0.3
 script = ExtResource("1_cvnsp")
 player1_color = Color(0, 18.892157, 18.892157, 1)
 player2_color = Color(18.892157, 0, 0, 1)
 ruler_x = NodePath("Rulers/y")
 ruler_y = NodePath("Rulers/x")
+area_2d = NodePath("Area2D")
 player_rig = NodePath("player_rig")
 graph = NodePath("Rulers/graph")
 path = NodePath("Rulers/path")
@@ -62,7 +63,7 @@ antialiased = true
 
 [node name="path" parent="Rulers" instance=ExtResource("3_fkybt")]
 
-[node name="Area2D" type="Area2D" parent="." groups=["p1"]]
+[node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_cvnsp")

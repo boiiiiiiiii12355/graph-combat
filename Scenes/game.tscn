@@ -34,11 +34,13 @@ stretch_mode = 1
 
 [node name="Player1" parent="." node_paths=PackedStringArray("ui", "cam") instance=ExtResource("1_ebmjs")]
 position = Vector2(-207, 0)
+player_id = 1
 ui = NodePath("../CanvasLayer/UI")
 cam = NodePath("../math_camera")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("ui", "cam") instance=ExtResource("1_ebmjs")]
 position = Vector2(177, 1)
+player_id = 2
 ui = NodePath("../CanvasLayer/UI")
 cam = NodePath("../math_camera")
 
