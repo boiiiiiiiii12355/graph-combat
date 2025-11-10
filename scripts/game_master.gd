@@ -5,7 +5,7 @@ var time_value = 1
 var accel = 0.1
 var current_turn : String = "P1"
 var turn_order : Array = ["P1", "P2"]
-var base_combat_time = 1 #seconds
+var base_combat_time = 5 #seconds
 var combat_time = base_combat_time
 
 func _physics_process(delta: float) -> void:

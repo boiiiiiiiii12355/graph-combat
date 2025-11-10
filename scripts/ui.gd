@@ -107,6 +107,12 @@ var x_check = RegEx.new()
 var y_error
 var x_error
 func _on_text_edit_text_changed() -> void:
+	get_dir_in()
+
+func _on_input_text_changed() -> void:
+	get_dir_in()
+	
+func get_dir_in():
 	y_check.compile("(?<= =).*")
 	x_check.compile("(?<=f\\().*?(?=\\))")
 	var input_text
@@ -121,8 +127,7 @@ func _on_text_edit_text_changed() -> void:
 	if input_x and input_y:
 		y_error = y_expression.parse(input_y.get_string(), ["x"])
 		x_error = x_expression.parse(input_x.get_string(), ["x"])
-
-
+		
 var typing = false
 func _on_input_mouse_entered() -> void:
 	typing = true

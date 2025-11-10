@@ -1,6 +1,7 @@
 class_name player_1
 extends RigidBody2D
 
+@export var player_id : int 
 @export var player1_color : Color = Color(0.0, 1.0, 1.0)
 @export var player2_color : Color = Color(1.0, 0.0, 0.0, 1.0)
 @export var ruler_x : Line2D
@@ -8,6 +9,7 @@ extends RigidBody2D
 @export var ruler_x_color = Color(0.0, 0.373, 0.599, 1.0)
 @export var ruler_y_color = Color(0.0, 0.598, 0.951, 1.0)
 @export var ruler_width = 2
+var current_turn : int
 var graph_end
 var paused = true
 
@@ -22,9 +24,9 @@ func _ready() -> void:
 	body = player_rig.get_child(4)
 	init_path()
 	center_point = roundi((graph.get_point_count() + 1) / 2)
-	if self.name == "Player1":
+	if player_id == 1:
 		body.get_child(1).modulate = player1_color
-	elif self.name == "Player2":
+	elif player_id == 2:
 		body.get_child(1).modulate = player2_color
 
 func init_path():
@@ -35,6 +37,7 @@ func init_path():
 
 func _physics_process(delta: float) -> void:
 	ruler()
+	body.global_position = global_position
 	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.2)
 
 

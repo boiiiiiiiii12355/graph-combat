@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8pl2y15qc3en"]
+[gd_scene load_steps=8 format=3 uid="uid://c8pl2y15qc3en"]
 
 [ext_resource type="Texture2D" uid="uid://coccuu17omink" path="res://sbs_-_texture_grid_pack/512x512/Gray/Prototype_Grid_Gray_03-512x512.png" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cl3mk4vqd4f8d" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://byugwkpud0is0" path="res://Scenes/math_camera.tscn" id="3_3dryh"]
 [ext_resource type="PackedScene" uid="uid://d3ixkjyjao54n" path="res://Scenes/ui.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://jg3wydd1d6fe" path="res://Scenes/xy_labels.tscn" id="4_wowpa"]
-[ext_resource type="PackedScene" uid="uid://cx8lgv2n41hvn" path="res://Scenes/punching_bag.tscn" id="7_1l0tm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1l0tm"]
 
@@ -34,22 +33,20 @@ texture = ExtResource("1_1l0tm")
 stretch_mode = 1
 
 [node name="Player1" parent="." node_paths=PackedStringArray("ui", "cam") instance=ExtResource("1_ebmjs")]
+position = Vector2(-207, 0)
 ui = NodePath("../CanvasLayer/UI")
 cam = NodePath("../math_camera")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("ui", "cam") instance=ExtResource("1_ebmjs")]
-position = Vector2(384, 1)
+position = Vector2(177, 1)
 ui = NodePath("../CanvasLayer/UI")
 cam = NodePath("../math_camera")
-
-[node name="punching_bag" parent="." instance=ExtResource("7_1l0tm")]
-position = Vector2(181, -51)
 
 [node name="math_camera" parent="." node_paths=PackedStringArray("p1", "p2") instance=ExtResource("3_3dryh")]
 process_mode = 3
 zoom = Vector2(3, 3)
 p1 = NodePath("../Player1")
-p2 = NodePath("../punching_bag")
+p2 = NodePath("../Player2")
 
 [node name="Rulers" type="Node2D" parent="."]
 
