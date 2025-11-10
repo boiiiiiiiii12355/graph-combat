@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8pl2y15qc3en"]
+[gd_scene load_steps=9 format=3 uid="uid://c8pl2y15qc3en"]
 
 [ext_resource type="Texture2D" uid="uid://coccuu17omink" path="res://sbs_-_texture_grid_pack/512x512/Gray/Prototype_Grid_Gray_03-512x512.png" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cl3mk4vqd4f8d" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://byugwkpud0is0" path="res://Scenes/math_camera.tscn" id="3_3dryh"]
 [ext_resource type="PackedScene" uid="uid://d3ixkjyjao54n" path="res://Scenes/ui.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://jg3wydd1d6fe" path="res://Scenes/xy_labels.tscn" id="4_wowpa"]
-[ext_resource type="PackedScene" uid="uid://olbouuixcjs4" path="res://Scenes/path_calc.tscn" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://cx8lgv2n41hvn" path="res://Scenes/punching_bag.tscn" id="7_1l0tm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1l0tm"]
@@ -34,9 +33,13 @@ offset_bottom = 769.0
 texture = ExtResource("1_1l0tm")
 stretch_mode = 1
 
-[node name="Player1" parent="." node_paths=PackedStringArray("ui", "path", "cam") instance=ExtResource("1_ebmjs")]
+[node name="Player1" parent="." node_paths=PackedStringArray("ui", "cam") instance=ExtResource("1_ebmjs")]
 ui = NodePath("../CanvasLayer/UI")
-path = NodePath("../path")
+cam = NodePath("../math_camera")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("ui", "cam") instance=ExtResource("1_ebmjs")]
+position = Vector2(384, 1)
+ui = NodePath("../CanvasLayer/UI")
 cam = NodePath("../math_camera")
 
 [node name="punching_bag" parent="." instance=ExtResource("7_1l0tm")]
@@ -63,8 +66,6 @@ default_color = Color(0, 1, 0, 1)
 [node name="xy_labels" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_wowpa")]
 player = NodePath("../Player1")
 
-[node name="path" parent="." instance=ExtResource("5_i6g32")]
-
 [node name="floor" type="StaticBody2D" parent="."]
 position = Vector2(0, 383)
 
@@ -76,5 +77,6 @@ environment = SubResource("Environment_1l0tm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="CanvasLayer" node_paths=PackedStringArray("player1") instance=ExtResource("4_3dryh")]
+[node name="UI" parent="CanvasLayer" node_paths=PackedStringArray("player1", "player2") instance=ExtResource("4_3dryh")]
 player1 = NodePath("../../Player1")
+player2 = NodePath("../../Player2")

@@ -8,7 +8,7 @@ func _ready() -> void:
 	_on_text_edit_text_changed()
 	get_tree().paused = true
 	paused = true
-
+	
 
 var paused = true
 func _physics_process(delta: float) -> void:
