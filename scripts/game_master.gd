@@ -25,7 +25,7 @@ func next_turn():
 
 func advantage():
 	combat_time += 0.5
-	
+
 func combat_tick(time):
 	var done = false
 	for int in combat_time:
