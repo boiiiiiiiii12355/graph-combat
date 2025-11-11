@@ -41,6 +41,8 @@ cam = NodePath("../math_camera")
 [node name="Player2" parent="." node_paths=PackedStringArray("ui", "cam") instance=ExtResource("1_ebmjs")]
 position = Vector2(177, 1)
 player_id = 2
+ruler_x_color = Color(0.66559863, 0.07725575, 1.92523e-07, 1)
+ruler_y_color = Color(0.99999994, 0.2661778, 0.057402894, 1)
 ui = NodePath("../CanvasLayer/UI")
 cam = NodePath("../math_camera")
 
@@ -64,6 +66,9 @@ default_color = Color(0, 1, 0, 1)
 
 [node name="xy_labels" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_wowpa")]
 player = NodePath("../Player1")
+
+[node name="xy_labels2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_wowpa")]
+player = NodePath("../Player2")
 
 [node name="floor" type="StaticBody2D" parent="."]
 position = Vector2(0, 383)

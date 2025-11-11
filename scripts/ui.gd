@@ -44,6 +44,7 @@ func ui_ctrl():
 	
 	if current_turn == "P1":
 		dir_input = p1_input
+		dir_toggle = dir_toggle_p1
 		player = player1
 		p1_parent.global_position = lerp(p1_parent.global_position, Vector2(0, 0), 0.1)
 	else:
@@ -51,6 +52,7 @@ func ui_ctrl():
 		
 	if current_turn == "P2":
 		dir_input = p2_input
+		dir_toggle = dir_toggle_p2
 		player = player2
 		p2_parent.global_position = lerp(p2_parent.global_position, Vector2(0, 0), 0.1)
 	else:
@@ -67,6 +69,8 @@ func ui_ctrl():
 
 #responsible for checking both time and direction of graph slide
 @export var dir_toggle_p1 : CheckButton
+@export var dir_toggle_p2 : CheckButton
+var dir_toggle : CheckButton
 func check_dir_time():
 	if not paused:
 		if dir_toggle.button_pressed:
