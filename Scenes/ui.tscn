@@ -97,7 +97,7 @@ offset_left = 1604.0
 offset_top = 52.0
 offset_right = 1890.0
 offset_bottom = 93.0
-text = "f(x) = x ** 2 / 200 - 250"
+text = "f(x) = x ** 2 / 200 - 200"
 placeholder_text = "f(x) = m * x + c
 "
 selecting_enabled = false
@@ -160,7 +160,7 @@ offset_left = 1604.0
 offset_top = 52.0
 offset_right = 1890.0
 offset_bottom = 93.0
-text = "f(x) = x ** 2 / 200 - 250"
+text = "f(x) = x ** 2 / 200 - 200"
 placeholder_text = "f(x) = m * x + c
 "
 selecting_enabled = false
@@ -180,4 +180,5 @@ offset_bottom = 1080.0
 [connection signal="mouse_exited" from="input p1/input" to="." method="_on_input_mouse_exited"]
 [connection signal="text_changed" from="input p1/input" to="." method="_on_text_edit_text_changed"]
 [connection signal="timeout" from="input p1/graph_update" to="." method="_on_graph_update_timeout"]
+[connection signal="toggled" from="input p2/opposite direction" to="." method="_on_opposite_direction_toggled"]
 [connection signal="text_changed" from="input p2/input" to="." method="_on_input_text_changed"]

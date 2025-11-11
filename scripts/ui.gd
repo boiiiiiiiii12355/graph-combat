@@ -66,7 +66,7 @@ func ui_ctrl():
 
 
 #responsible for checking both time and direction of graph slide
-@export var dir_toggle : CheckButton
+@export var dir_toggle_p1 : CheckButton
 func check_dir_time():
 	if not paused:
 		if dir_toggle.button_pressed:

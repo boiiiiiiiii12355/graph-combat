@@ -5,7 +5,7 @@ var time_value = 1
 var accel = 0.1
 var current_turn : String = "P1"
 var turn_order : Array = ["P1", "P2"]
-var base_combat_time = 5 #seconds
+var base_combat_time = 1 #seconds
 var combat_time = base_combat_time
 
 func _physics_process(delta: float) -> void:
@@ -24,7 +24,9 @@ func next_turn():
 		current_turn = turn_order[0]
 
 func advantage():
+	print("ADVANTAGE!!!")
 	combat_time += 0.5
+	print("combat_time " + str(combat_time))
 
 func combat_tick(time):
 	var done = false

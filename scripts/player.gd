@@ -55,7 +55,6 @@ func init_path():
 
 func _physics_process(delta: float) -> void:
 	ruler()
-	body.global_position = global_position
 	hit_sound.pitch_scale = lerp(hit_sound.pitch_scale, Engine.time_scale, 0.2)
 
 
@@ -84,6 +83,7 @@ func movement(graph_zip_dir : String):
 			
 #run this when reaching end of graph
 func let_go():
+	stored_momentum = linear_velocity
 	gravity_scale = .3
 	R_arm.gravity_scale = .3
 	L_arm.gravity_scale = .3
@@ -99,7 +99,7 @@ func rope_ride(graph_zip_dir : String):
 	angular_velocity += -(rotation - path_follow.rotation) * 10
 	R_arm.global_position = lerp(R_arm.global_position, path_follow.global_position, 0.7)
 	L_arm.global_position = lerp(L_arm.global_position, path_follow.global_position, 0.7)
-	stored_momentum = linear_velocity
+	
 	
 	if graph_zip_dir == "left":
 		path_follow.progress -= graph_zip_speed
@@ -186,11 +186,16 @@ func hit_particle(subject):
 	hit_particle_effect.restart()
 
 @export var hit_sound : AudioStreamPlayer2D
+var hit = false
 func _on_area_2d_area_entered(area : Area2D):
-	if area.is_in_group(opposition):
-		area.get_parent().angular_velocity = 50
-		area.get_parent().linear_velocity = stored_momentum
-		stored_momentum = Vector2.ZERO
-		hit_particle(area)
-		gamemaster.juice(cam)
-		hit_sound.play()
+	if area.is_in_group(opposition) and not hit:
+		if abs(self.linear_velocity) >= abs(area.get_parent().linear_velocity):
+			hit = true
+			area.get_parent().hit = true
+			area.get_parent().angular_velocity = angular_velocity
+			area.get_parent().linear_velocity = stored_momentum 
+			stored_momentum = Vector2.ZERO
+			hit_particle(area)
+			gamemaster.juice(cam)
+			gamemaster.advantage()
+			hit_sound.play()
