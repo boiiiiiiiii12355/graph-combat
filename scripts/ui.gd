@@ -100,6 +100,9 @@ func calc_x(curr_x):
 	else:
 		return 0
 	
+func calc_limit():
+	pass
+	
 	
 @export var dir_input : TextEdit
 @export var p1_input : TextEdit
@@ -108,6 +111,8 @@ var y_expression = Expression.new()
 var y_check = RegEx.new()
 var x_expression = Expression.new()
 var x_check = RegEx.new()
+var limit_check1 = RegEx.new()
+var limit_check2 = RegEx.new()
 var y_error
 var x_error
 func _on_text_edit_text_changed() -> void:
@@ -119,10 +124,12 @@ func _on_input_text_changed() -> void:
 func get_dir_in():
 	y_check.compile("(?<= =).*")
 	x_check.compile("(?<=f\\().*?(?=\\))")
+	limit_check1.compile("\\{([^}]*)\\}")
+	limit_check2.compile("(-?\\d+\\s*<)|(<\\s*\\d+)|([a-zA-Z_]\\w*)")
 	var input_text
 	var input_y
 	var input_x
-		
+	
 	if dir_input:
 		input_text = dir_input.text
 		input_y = y_check.search(input_text)
@@ -131,6 +138,7 @@ func get_dir_in():
 	if input_x and input_y:
 		y_error = y_expression.parse(input_y.get_string(), ["x"])
 		x_error = x_expression.parse(input_x.get_string(), ["x"])
+		
 		
 var typing = false
 func _on_input_mouse_entered() -> void:

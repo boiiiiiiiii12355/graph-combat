@@ -61,10 +61,10 @@ offset_bottom = 1080.0
 
 [node name="tips" type="Label" parent="input p1"]
 layout_mode = 0
-offset_left = 1588.0
-offset_top = 94.0
-offset_right = 1926.0
-offset_bottom = 351.0
+offset_left = 1558.0
+offset_top = 789.0
+offset_right = 1896.0
+offset_bottom = 1072.0
 text = "tab to resume time
 and apply formula
 press tab again to pause
@@ -124,10 +124,10 @@ color = Color(0.8901961, 0.105882354, 0, 1)
 
 [node name="tips" type="Label" parent="input p2"]
 layout_mode = 0
-offset_left = 1588.0
-offset_top = 94.0
-offset_right = 1926.0
-offset_bottom = 351.0
+offset_left = 1560.0
+offset_top = 784.0
+offset_right = 1898.0
+offset_bottom = 1067.0
 text = "tab to resume time
 and apply formula
 press tab again to pause
@@ -138,7 +138,7 @@ numbers to x in f(x)
 
 - if you want to use powers try x ** 2
 
-- forcos and sin its cos(x) and sin(x)"
+- forces and sin its cos(x) and sin(x)"
 
 [node name="opposite direction" type="CheckButton" parent="input p2"]
 layout_mode = 0
