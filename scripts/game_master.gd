@@ -3,10 +3,20 @@ extends Node2D
 
 var time_value = 1
 var accel = 0.1
-var current_turn : String = "P1"
+var current_turn : String = "P2"
 var turn_order : Array = ["P1", "P2"]
 var base_combat_time = 1 #seconds
 var combat_time = base_combat_time
+
+func _ready():
+	var random = randi_range(1, 2)
+	if random == 1:
+		current_turn = "P1"
+	elif random == 2:
+		current_turn = "P2"
+
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
+	time_speed_set(1)
 
 func _physics_process(delta: float) -> void:
 	Engine.time_scale = lerp(Engine.time_scale, time_value, accel)
@@ -39,10 +49,6 @@ func combat_tick(time):
 		else:
 			done = false
 	return done
-
-func _ready() -> void:
-	self.process_mode = Node.PROCESS_MODE_ALWAYS
-	time_speed_set(1)
 
 
 func time_speed_set(_0to1_ : float):
